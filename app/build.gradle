@@ -51,7 +51,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
     // Rx Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     // lombok
     compile 'org.projectlombok:lombok:1.16.10'
