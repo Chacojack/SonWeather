@@ -2,6 +2,7 @@ package jack.me.sonweather.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
@@ -16,6 +17,9 @@ import jack.me.sonweather.model.City;
  */
 
 public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
+
+    public static final String TAG = DataBaseHelper.class.getSimpleName();
+
     public static final int VERSION = 1;
     public static final String DATABASE_NAME = "son_weather.db";
 
@@ -38,6 +42,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
+        Log.d(TAG, "onCreate: ");
         try {
             TableUtils.createTableIfNotExists(connectionSource, City.class);
         } catch (SQLException e) {

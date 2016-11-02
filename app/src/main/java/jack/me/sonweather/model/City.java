@@ -5,6 +5,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -23,13 +24,14 @@ public class City {
     String id;
     @DatabaseField(columnName = "cName")
     @SerializedName("name")
-    String name ;
+    String name;
     @DatabaseField(columnName = "cEnglishName")
     @SerializedName("en")
     String englishName;
     @SerializedName("list")
-    ArrayList<City> cities;
-
+    List<City> cities;
+    @DatabaseField(columnName = "children")
+    List<String> childrenId = new ArrayList<>();
     @DatabaseField(columnName = "extra")
     String extra;
 
