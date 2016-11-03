@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import jack.me.sonweather.database.IDBHandler;
 import jack.me.sonweather.net.INetHandler;
+import jack.me.sonweather.presenter.WeatherPresenter;
 
 /**
  * Created by zjchai on 2016/11/1.
@@ -14,5 +15,7 @@ import jack.me.sonweather.net.INetHandler;
 public interface AppComponent {
 
     void inject(SonApplication application);
+
+    void inject(WeatherPresenter presenter);
 
 }
