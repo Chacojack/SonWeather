@@ -16,21 +16,8 @@ public class DBHandler implements IDBHandler {
     private DataBaseHelper dataBaseHelper;
     private Dao<City, Integer> cityBao;
 
-    private static IDBHandler instance;
-
-    private DBHandler(SonApplication a) {
+    public DBHandler(SonApplication a) {
         init(a);
-    }
-
-    public static IDBHandler getInstance(SonApplication a) {
-        if (instance == null) {
-            synchronized (DBHandler.class) {
-                if (instance == null) {
-                    instance = new DBHandler(a);
-                }
-            }
-        }
-        return instance;
     }
 
     private void init(SonApplication application) {

@@ -13,6 +13,9 @@ public class WeatherContract {
     public interface IPresenter{
 
         void printWeather();
+
+        void loadCurrentLocationWeather();
+
     }
 
 }

@@ -6,6 +6,8 @@ import dagger.Module;
 import dagger.Provides;
 import jack.me.sonweather.database.DBHandler;
 import jack.me.sonweather.database.IDBHandler;
+import jack.me.sonweather.location.ILocationHandler;
+import jack.me.sonweather.location.LocationHandler;
 import jack.me.sonweather.net.INetHandler;
 import jack.me.sonweather.net.NetHandler;
 
@@ -30,13 +32,19 @@ public class AppModule {
     @Singleton
     @Provides
     public INetHandler provideNetHandler(){
-        return NetHandler.getInstance();
+        return new NetHandler();
     }
 
     @Singleton
     @Provides
     public IDBHandler provideDBHandler(){
-        return DBHandler.getInstance(application);
+        return new DBHandler(application);
+    }
+
+    @Singleton
+    @Provides
+    public ILocationHandler provideLocationHandler(){
+        return new LocationHandler(application);
     }
 
 }

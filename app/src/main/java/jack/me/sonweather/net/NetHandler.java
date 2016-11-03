@@ -19,23 +19,9 @@ public class NetHandler implements INetHandler {
     Retrofit retrofit;
     ISonNetService sonNetService;
 
-    private static INetHandler instance;
-
-    private NetHandler() {
+    public NetHandler() {
         init();
     }
-
-    public static INetHandler getInstance() {
-        if (instance == null) {
-            synchronized (NetHandler.class) {
-                if (instance == null) {
-                    instance = new NetHandler();
-                }
-            }
-        }
-        return instance;
-    }
-
 
     private void init() {
         retrofit = new Retrofit.Builder()
