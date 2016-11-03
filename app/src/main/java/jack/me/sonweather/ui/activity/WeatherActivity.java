@@ -2,8 +2,7 @@ package jack.me.sonweather.ui.activity;
 
 import butterknife.ButterKnife;
 import jack.me.sonweather.R;
-import jack.me.sonweather.component.DaggerWeatherComponent;
-import jack.me.sonweather.component.WeatherComponent;
+import jack.me.sonweather.component.DaggerWeatherViewComponent;
 import jack.me.sonweather.contract.WeatherContract;
 import jack.me.sonweather.module.WeatherViewModule;
 
@@ -38,7 +37,7 @@ public class WeatherActivity extends Activity implements WeatherContract.IView{
     }
 
     private void inject() {
-        DaggerWeatherComponent.builder().weatherViewModule(new WeatherViewModule(this)).build().inject(this);
+        DaggerWeatherViewComponent.builder().weatherViewModule(new WeatherViewModule(this)).build().inject(this);
     }
 
     private void afterInject() {

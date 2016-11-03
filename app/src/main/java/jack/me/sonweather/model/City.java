@@ -30,10 +30,11 @@ public class City {
     String englishName;
     @SerializedName("list")
     List<City> cities;
-    @DatabaseField(columnName = "children")
     List<String> childrenId = new ArrayList<>();
     @DatabaseField(columnName = "extra")
     String extra;
+    @DatabaseField(columnName = "children")
+    String childrenIdJson;
 
 
     @Tolerate

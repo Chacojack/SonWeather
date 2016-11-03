@@ -13,8 +13,6 @@ import jack.me.sonweather.net.INetHandler;
 @Component(modules = AppModule.class)
 public interface AppComponent {
 
-    INetHandler getNetHandler();
-
-    IDBHandler getDBHandler();
+    void inject(SonApplication application);
 
 }

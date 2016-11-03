@@ -2,8 +2,6 @@ package jack.me.sonweather.presenter;
 
 import android.util.Log;
 
-import javax.inject.Inject;
-
 import jack.me.sonweather.contract.WeatherContract;
 
 /**
@@ -14,10 +12,8 @@ public class WeatherPresenter implements WeatherContract.IPresenter {
 
     public static final String TAG = WeatherPresenter.class.getSimpleName();
 
-    @Inject
     WeatherContract.IView view;
 
-    @Inject
     public WeatherPresenter(WeatherContract.IView view) {
         this.view = view;
     }
