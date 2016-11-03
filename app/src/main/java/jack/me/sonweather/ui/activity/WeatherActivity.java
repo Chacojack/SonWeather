@@ -1,7 +1,10 @@
 package jack.me.sonweather.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import javax.inject.Inject;
 
@@ -45,7 +48,13 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     }
 
     private void afterViews() {
-
+        // create our manager instance after the content view is set
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        // enable status bar tint
+        tintManager.setStatusBarTintEnabled(true);
+        // enable navigation bar tint
+        tintManager.setNavigationBarTintEnabled(true);
+        tintManager.setTintColor(Color.parseColor("#00000000"));
     }
 
 }
