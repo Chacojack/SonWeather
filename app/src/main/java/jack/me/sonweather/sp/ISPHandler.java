@@ -5,4 +5,7 @@ package jack.me.sonweather.sp;
  */
 
 public interface ISPHandler {
+    void setLocation(String location);
+
+    String getLocation();
 }

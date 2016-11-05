@@ -10,6 +10,8 @@ import jack.me.sonweather.location.ILocationHandler;
 import jack.me.sonweather.location.LocationHandler;
 import jack.me.sonweather.net.INetHandler;
 import jack.me.sonweather.net.NetHandler;
+import jack.me.sonweather.sp.ISPHandler;
+import jack.me.sonweather.sp.SPHandler;
 
 /**
  * Created by zjchai on 2016/11/1.
@@ -45,6 +47,12 @@ public class AppModule {
     @Provides
     public ILocationHandler provideLocationHandler(){
         return new LocationHandler(application);
+    }
+
+    @Singleton
+    @Provides
+    public ISPHandler provideSPHandler(){
+        return new SPHandler(application);
     }
 
 }

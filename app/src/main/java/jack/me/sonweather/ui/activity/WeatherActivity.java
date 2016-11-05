@@ -1,6 +1,8 @@
 package jack.me.sonweather.ui.activity;
 
+import android.annotation.TargetApi;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,7 +22,9 @@ import jack.me.sonweather.component.DaggerWeatherViewComponent;
 import jack.me.sonweather.contract.WeatherContract;
 import jack.me.sonweather.module.WeatherViewModule;
 
-public class WeatherActivity extends AppCompatActivity implements WeatherContract.IView, AMapLocationListener {
+import static jack.me.sonweather.location.LocationHandler.PERMISSON_REQUESTCODE;
+
+public class WeatherActivity extends AppCompatActivity implements WeatherContract.IView {
 
     private static final String TAG = WeatherActivity.class.getSimpleName();
     @Inject
@@ -52,7 +56,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     }
 
     private void afterInject() {
-        presenter.printWeather();
+
     }
 
     private void afterViews() {
@@ -67,34 +71,17 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     }
 
     @Override
-    public void onLocationChanged(AMapLocation amapLocation) {
-        if (amapLocation != null) {
-            if (amapLocation.getErrorCode() == 0) {
-                //定位成功回调信息，设置相关消息
-                amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                amapLocation.getLatitude();//获取纬度
-                amapLocation.getLongitude();//获取经度
-                amapLocation.getAccuracy();//获取精度信息
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date date = new Date(amapLocation.getTime());
-                df.format(date);//定位时间
-                amapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
-                amapLocation.getCountry();//国家信息
-                amapLocation.getProvince();//省信息
-                String city = amapLocation.getCity();//城市信息
-                Log.d(TAG, "onLocationChanged: city:"+city+" time:"+System.currentTimeMillis());
-                amapLocation.getDistrict();//城区信息
-                amapLocation.getStreet();//街道信息
-                amapLocation.getStreetNum();//街道门牌号信息
-                amapLocation.getCityCode();//城市编码
-                amapLocation.getAdCode();//地区编码
-            } else {
-                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                Log.e("AmapError", "location Error, ErrCode:"
-                        + amapLocation.getErrorCode() + ", errInfo:"
-                        + amapLocation.getErrorInfo());
-            }
+    protected void onResume() {
+        super.onResume();
+        if (Build.VERSION.SDK_INT >= 23) {
+            presenter.checkPermissions(this);
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] paramArrayOfInt) {
+        presenter.handleRequestPermissionsResult(requestCode,permissions,paramArrayOfInt);
+
+    }
 }
