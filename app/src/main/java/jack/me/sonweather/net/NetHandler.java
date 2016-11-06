@@ -34,10 +34,7 @@ public class NetHandler implements INetHandler {
 
     @Override
     public Observable<City> getCityList() {
-        return sonNetService.getCityList()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+        return sonNetService.getCityList();
     }
 
 

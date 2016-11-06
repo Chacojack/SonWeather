@@ -8,4 +8,8 @@ public interface ISPHandler {
     void setLocation(String location);
 
     String getLocation();
+
+    void setLoadedCities(boolean loadedCities);
+
+    boolean isLoadedCities();
 }

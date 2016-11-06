@@ -1,5 +1,6 @@
 package jack.me.sonweather.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -18,6 +19,8 @@ import lombok.experimental.Tolerate;
 @Builder
 @DatabaseTable
 public class City {
+
+    public static final String SPLIT = "#";
 
     @DatabaseField(columnName = "cId")
     @SerializedName("city_id")
@@ -40,4 +43,15 @@ public class City {
     @Tolerate
     public City() {
     }
+
+    public void transformChildren(){
+        if (cities != null) {
+            childrenId.clear();
+            for (City city : cities) {
+                childrenId.add(city.getId());
+            }
+            childrenIdJson = new Gson().toJson(childrenId);
+        }
+    }
+
 }

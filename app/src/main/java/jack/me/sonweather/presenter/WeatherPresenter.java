@@ -23,9 +23,9 @@ import static jack.me.sonweather.location.LocationHandler.PERMISSON_REQUESTCODE;
 
 public class WeatherPresenter implements WeatherContract.IPresenter {
 
-    public static final String TAG = WeatherPresenter.class.getSimpleName();
+    private static final String TAG = WeatherPresenter.class.getSimpleName();
 
-    WeatherContract.IView view;
+    private WeatherContract.IView view;
 
     @Inject
     INetHandler netHandler;

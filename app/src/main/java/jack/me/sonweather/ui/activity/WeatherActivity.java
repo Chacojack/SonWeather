@@ -1,18 +1,15 @@
 package jack.me.sonweather.ui.activity;
 
-import android.annotation.TargetApi;
+import android.app.Application;
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationListener;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -22,14 +19,19 @@ import jack.me.sonweather.component.DaggerWeatherViewComponent;
 import jack.me.sonweather.contract.WeatherContract;
 import jack.me.sonweather.module.WeatherViewModule;
 
-import static jack.me.sonweather.location.LocationHandler.PERMISSON_REQUESTCODE;
-
 public class WeatherActivity extends AppCompatActivity implements WeatherContract.IView {
 
     private static final String TAG = WeatherActivity.class.getSimpleName();
     @Inject
     WeatherContract.IPresenter presenter;
 
+    public static void start(Context context) {
+        Intent intent = new Intent(context, WeatherActivity.class);
+        if (context instanceof Application || context instanceof Service) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +83,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] paramArrayOfInt) {
-        presenter.handleRequestPermissionsResult(requestCode,permissions,paramArrayOfInt);
+        presenter.handleRequestPermissionsResult(requestCode, permissions, paramArrayOfInt);
 
     }
 }
