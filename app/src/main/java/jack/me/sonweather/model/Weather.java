@@ -30,7 +30,7 @@ public class Weather {
     private String nightWindDirection;
     @SerializedName("sd")
     private String humidity;
-    @SerializedName("date")
+    @SerializedName(value = "date",alternate = "sj")
     private String date;
 
 

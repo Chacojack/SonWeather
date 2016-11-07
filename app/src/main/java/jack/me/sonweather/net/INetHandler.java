@@ -3,6 +3,7 @@ package jack.me.sonweather.net;
 import jack.me.sonweather.model.City;
 import jack.me.sonweather.net.entity.YYWeather7DResult;
 import jack.me.sonweather.net.entity.YYWeatherActualResult;
+import jack.me.sonweather.net.entity.YYWeatherHourResult;
 import rx.Observable;
 
 /**
@@ -14,4 +15,6 @@ public interface INetHandler {
     Observable<YYWeather7DResult> get7DWeatherByCity(String cityId);
 
     Observable<YYWeatherActualResult> getActualWeatherByCity(String city);
+
+    Observable<YYWeatherHourResult> getHoursWeatherByCity(String city);
 }

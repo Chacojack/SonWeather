@@ -12,4 +12,5 @@ public class HttpURLs {
 
     public static final String GET_WEATHER_SEVEN = "/forecast7d";
     public static final String GET_WEATHER_ACTUAL = "/observe";
+    public static final String GET_WEATHER_HOUR = "/weatherhours";
 }
