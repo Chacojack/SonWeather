@@ -7,6 +7,7 @@ import jack.me.sonweather.net.entity.YYWeather7DResult;
 import jack.me.sonweather.net.entity.YYWeatherActualResult;
 import jack.me.sonweather.net.entity.YYWeatherAirResult;
 import jack.me.sonweather.net.entity.YYWeatherHourResult;
+import jack.me.sonweather.net.entity.YYWeatherSunResult;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -61,5 +62,8 @@ public class NetHandler implements INetHandler {
         return sonNetService.getWeatherForAir(city, SonConstant.YYWeatherAppKey);
     }
 
-
+    @Override
+    public Observable<YYWeatherSunResult> getSunWeatherByCity(String city) {
+        return sonNetService.getWeatherForSun(city, SonConstant.YYWeatherAppKey);
+    }
 }
