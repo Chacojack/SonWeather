@@ -15,6 +15,7 @@ import jack.me.sonweather.location.ILocationHandler;
 import jack.me.sonweather.model.City;
 import jack.me.sonweather.net.INetHandler;
 import jack.me.sonweather.net.entity.YYWeatherActualResult;
+import jack.me.sonweather.net.entity.YYWeatherAirResult;
 import jack.me.sonweather.net.entity.YYWeatherHourResult;
 import jack.me.sonweather.sp.ISPHandler;
 import jack.me.sonweather.utils.LogUtils;
@@ -69,10 +70,20 @@ public class WeatherPresenter implements WeatherContract.IPresenter {
                         getWeather7D(city);
                         getActualWeather(city);
                         getHoursWeather(city);
+                        getAirWeather(city);
                     }
                 }
             }
         }
+    }
+
+    private void getAirWeather(City city) {
+        netHandler.getAirWeatherByCity(city.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    LogUtils.dFormat(TAG, "getAirWeather : result:%s ", result);
+                });
     }
 
     private void getHoursWeather(City city) {

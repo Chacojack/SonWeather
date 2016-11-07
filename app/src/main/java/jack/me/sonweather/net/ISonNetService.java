@@ -3,6 +3,7 @@ package jack.me.sonweather.net;
 import jack.me.sonweather.model.City;
 import jack.me.sonweather.net.entity.YYWeather7DResult;
 import jack.me.sonweather.net.entity.YYWeatherActualResult;
+import jack.me.sonweather.net.entity.YYWeatherAirResult;
 import jack.me.sonweather.net.entity.YYWeatherHourResult;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -26,5 +27,6 @@ public interface ISonNetService {
     @GET(HttpURLs.GET_WEATHER_HOUR)
     Observable<YYWeatherHourResult> getWeatherForHours(@Query("city") String city, @Query("key") String key);
 
-
+    @GET(HttpURLs.GET_WEATHER_AIR)
+    Observable<YYWeatherAirResult> getWeatherForAir(@Query("city") String city, @Query("key") String key);
 }
