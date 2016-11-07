@@ -14,9 +14,11 @@ import jack.me.sonweather.database.IDBHandler;
 import jack.me.sonweather.location.ILocationHandler;
 import jack.me.sonweather.model.City;
 import jack.me.sonweather.net.INetHandler;
+import jack.me.sonweather.net.entity.YYWeatherActualResult;
 import jack.me.sonweather.sp.ISPHandler;
 import jack.me.sonweather.utils.LogUtils;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -64,10 +66,20 @@ public class WeatherPresenter implements WeatherContract.IPresenter {
                     if (city != null) {
                         LogUtils.dFormat(TAG, "loadCurrentLocationWeather : cityId :%s ", city.getId());
                         getWeather7D(city);
+                        getActualWeather(city);
                     }
                 }
             }
         }
+    }
+
+    private void getActualWeather(City city) {
+        netHandler.getActualWeatherByCity(city.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    LogUtils.dFormat(TAG, "getActualWeather : result:%s ", result);
+                });
     }
 
     private void getWeather7D(City city) {

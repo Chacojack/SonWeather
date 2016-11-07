@@ -46,7 +46,7 @@ public class NetHandler implements INetHandler {
 
     @Override
     public Observable<YYWeatherActualResult> getActualWeatherByCity(String city){
-        return sonNetService.getWeatherForActual(city+"01",SonConstant.YYWeatherAppKey);
+        return sonNetService.getWeatherForActual(city,SonConstant.YYWeatherAppKey);
     }
 
 }
