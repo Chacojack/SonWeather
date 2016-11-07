@@ -1,6 +1,8 @@
 package jack.me.sonweather;
 
 import android.app.Application;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.facebook.stetho.Stetho;
@@ -34,5 +36,15 @@ public class SonApplication extends Application {
 
     public AppComponent getAppComponent() {
         return appComponent;
+    }
+
+    public String getYYWeatherKey(){
+        try {
+            ApplicationInfo info = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+            return info.metaData.getString("com.amap.api.v2.apikey");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

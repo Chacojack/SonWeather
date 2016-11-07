@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -14,10 +13,6 @@ import jack.me.sonweather.component.DaggerSplashComponent;
 import jack.me.sonweather.contract.SplashContract;
 import jack.me.sonweather.model.City;
 import jack.me.sonweather.module.SplashModule;
-import jack.me.sonweather.utils.LogUtils;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class SplashActivity extends AppCompatActivity implements SplashContract.IView {
 
@@ -42,7 +37,6 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
 
     @Override
     public void loadCitiesOver(List<City> cities) {
-        Toast.makeText(this, "loadCitiesOver : cities size:" + cities.size(), Toast.LENGTH_SHORT).show();
         WeatherActivity.start(this);
         finish();
     }

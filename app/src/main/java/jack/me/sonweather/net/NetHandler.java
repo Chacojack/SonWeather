@@ -1,12 +1,13 @@
 package jack.me.sonweather.net;
 
+import jack.me.sonweather.SonApplication;
+import jack.me.sonweather.constant.SonConstant;
 import jack.me.sonweather.model.City;
+import jack.me.sonweather.net.entity.YYWeather7DResult;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by zjchai on 2016/11/1.
@@ -37,5 +38,8 @@ public class NetHandler implements INetHandler {
         return sonNetService.getCityList();
     }
 
-
+    @Override
+    public Observable<YYWeather7DResult> getWeatherByCity(String cityId) {
+        return sonNetService.getWeatherForSeven(cityId+"01", SonConstant.YYWeatherAppKey);
+    }
 }

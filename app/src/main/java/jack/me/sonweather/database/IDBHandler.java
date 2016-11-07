@@ -7,4 +7,6 @@ import jack.me.sonweather.model.City;
  */
 public interface IDBHandler {
     int addCity(City city);
+
+    City getCityByName(String cityName);
 }

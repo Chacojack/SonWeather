@@ -62,11 +62,8 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     }
 
     private void afterViews() {
-        // create our manager instance after the content view is set
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        // enable status bar tint
         tintManager.setStatusBarTintEnabled(true);
-        // enable navigation bar tint
         tintManager.setNavigationBarTintEnabled(true);
         tintManager.setTintColor(Color.parseColor("#00000000"));
         presenter.loadCurrentLocationWeather();

@@ -1,5 +1,7 @@
 package jack.me.sonweather.presenter;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -12,13 +14,7 @@ import jack.me.sonweather.database.IDBHandler;
 import jack.me.sonweather.model.City;
 import jack.me.sonweather.net.INetHandler;
 import jack.me.sonweather.sp.ISPHandler;
-import jack.me.sonweather.utils.LogUtils;
-import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -45,40 +41,47 @@ public class SplashPresenter implements SplashContract.IPresenter {
     @Override
     public void loadCityCode() {
         if (spHandler.isLoadedCities()) {
-
+            view.loadCitiesOver(null);
         } else {
             netHandler.getCityList()
                     .subscribeOn(Schedulers.io())
-                    .map(city -> {
-                        LogUtils.dFormat(TAG, "loadCityCode : city:%s ", city.toString());
-                        List<City> result = new ArrayList<>();
-                        Stack<City> cityStack = new Stack<>();
-                        cityStack.push(city);
-                        while (!cityStack.isEmpty()) {
-                            // 处理单个City
-                            City temp = cityStack.pop();
-                            temp.transformChildren();
-                            result.add(temp);
-                            // 处理City下的子City
-                            List<City> cityList = temp.getCities();
-                            if (cityList != null) {
-                                for (City c : cityList) {
-                                    cityStack.push(c);
-                                }
-                            }
-                        }
-                        return result;
-                    })
+                    .map(this::getCities)
                     .subscribeOn(Schedulers.computation())
                     .observeOn(Schedulers.io())
                     .forEach(cities -> {
-                        for (City city : cities) {
-                            dbHandler.addCity(city);
-                        }
+                        storeCities(cities);
                         AndroidSchedulers.mainThread().createWorker().schedule(() -> view.loadCitiesOver(cities));
                     });
 
         }
+    }
+
+    private void storeCities(List<City> cities) {
+        for (City city : cities) {
+            dbHandler.addCity(city);
+        }
+        spHandler.setLoadedCities(true);
+    }
+
+    @NonNull
+    private List<City> getCities(City city) {
+        List<City> result = new ArrayList<>();
+        Stack<City> cityStack = new Stack<>();
+        cityStack.push(city);
+        while (!cityStack.isEmpty()) {
+            // 处理单个City
+            City temp = cityStack.pop();
+            temp.transformChildren();
+            result.add(temp);
+            // 处理City下的子City
+            List<City> cityList = temp.getCities();
+            if (cityList != null) {
+                for (City c : cityList) {
+                    cityStack.push(c);
+                }
+            }
+        }
+        return result;
     }
 }
 
