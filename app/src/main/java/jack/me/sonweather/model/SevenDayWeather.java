@@ -10,9 +10,9 @@ import lombok.Data;
  * Created by zjchai on 2016/11/6.
  */
 @Data
-public class Weather7D {
+public class SevenDayWeather {
 
-    private static final String TAG = Weather7D.class.getSimpleName();
+    private static final String TAG = SevenDayWeather.class.getSimpleName();
 
     @SerializedName("cityId")
     private String cityId;

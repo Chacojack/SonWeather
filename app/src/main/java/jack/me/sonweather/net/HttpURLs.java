@@ -11,4 +11,5 @@ public class HttpURLs {
 //    http://api.yytianqi.com/forecast7d?city=CH010100&key=02aov3a7wvo81bvw
 
     public static final String GET_WEATHER_SEVEN = "/forecast7d";
+    public static final String GET_WEATHER_ACTUAL = "/observe";
 }

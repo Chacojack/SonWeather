@@ -71,7 +71,7 @@ public class WeatherPresenter implements WeatherContract.IPresenter {
     }
 
     private void getWeather7D(City city) {
-        netHandler.getWeatherByCity(city.getId())
+        netHandler.get7DWeatherByCity(city.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {

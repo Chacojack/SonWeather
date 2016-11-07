@@ -47,7 +47,15 @@ public class DBHandler implements IDBHandler {
         try {
             List<City> cities = cityBao.queryForEq("cName", cityName);
             if (cities != null && cities.size() > 0) {
-                return cities.get(0);
+                int index = 0;
+                for (int i = 0; i < cities.size(); i++) {
+                    int now = cities.get(i).getId().length();
+                    int old = cities.get(index).getId().length();
+                    if (old < now) {
+                        index = i;
+                    }
+                }
+                return cities.get(index);
             } else {
                 return null;
             }
