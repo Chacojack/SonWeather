@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationListener;
 
 import javax.inject.Inject;
 
@@ -14,17 +13,11 @@ import jack.me.sonweather.contract.WeatherContract;
 import jack.me.sonweather.database.IDBHandler;
 import jack.me.sonweather.location.ILocationHandler;
 import jack.me.sonweather.model.City;
-import jack.me.sonweather.model.Weather7D;
 import jack.me.sonweather.net.INetHandler;
-import jack.me.sonweather.net.entity.YYWeatherBaseResult;
 import jack.me.sonweather.sp.ISPHandler;
 import jack.me.sonweather.utils.LogUtils;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-
-import static jack.me.sonweather.location.LocationHandler.PERMISSON_REQUESTCODE;
 
 /**
  * Created by zjchai on 2016/11/2.

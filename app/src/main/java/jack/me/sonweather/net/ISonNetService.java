@@ -1,9 +1,7 @@
 package jack.me.sonweather.net;
 
 import jack.me.sonweather.model.City;
-import jack.me.sonweather.model.Weather7D;
 import jack.me.sonweather.net.entity.YYWeather7DResult;
-import jack.me.sonweather.net.entity.YYWeatherBaseResult;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;

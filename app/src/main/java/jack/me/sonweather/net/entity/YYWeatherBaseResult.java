@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
- * Created by zjchai on 2016/11/6.
+ * Created by zjchai on 2016/11/7.
  */
 @Data
 public class YYWeatherBaseResult {
@@ -13,10 +13,10 @@ public class YYWeatherBaseResult {
     private static final String TAG = YYWeatherBaseResult.class.getSimpleName();
 
     @SerializedName("code")
-    private int code;
+    int code;
     @SerializedName("msg")
-    private String msg;
+    String msg;
     @SerializedName("counts")
-    private int counts;
+    int counts;
 
 }

@@ -12,22 +12,24 @@ public class Weather {
 
     private static final String TAG = Weather.class.getSimpleName();
 
-    @SerializedName("tq1")
+    @SerializedName(value = "tq1",alternate = "tq")
     private String dayWeather;
     @SerializedName("tq2")
     private String nightWeather;
-    @SerializedName("qw1")
+    @SerializedName(value = "qw1",alternate = "qw")
     private String dayTemperature;
     @SerializedName("qw2")
     private String nightTemperature;
-    @SerializedName("fl1")
+    @SerializedName(value = "fl1",alternate = "fl")
     private String dayWindPower;
     @SerializedName("fl2")
     private String nightWindPower;
-    @SerializedName("fx1")
+    @SerializedName(value = "fx1",alternate = "fx")
     private String dayWindDirection;
     @SerializedName("fx2")
     private String nightWindDirection;
+    @SerializedName("sd")
+    private String humidity;
     @SerializedName("date")
     private String date;
 
