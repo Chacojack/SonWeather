@@ -18,6 +18,8 @@
             android:layout_height="match_parent"
             android:minHeight="@dimen/dimen_120"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:app_bar_elevation_start="0dp"
+            app:app_bar_elevation_end="5dp"
             >
 
             <RelativeLayout
@@ -135,6 +137,16 @@
 
 
             </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one_px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/divide"
+                app:layout_shrinkMode="parallax"
+                app:layout_shrinkParallaxMultiplier="-0.02"
+                app:alphaEnd="0"
+                />
 
 
         </jack.me.collapsinglayoutlibrary.CollapsingLayout>

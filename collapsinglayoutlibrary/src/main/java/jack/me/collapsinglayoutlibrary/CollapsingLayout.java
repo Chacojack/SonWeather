@@ -2,7 +2,9 @@ package jack.me.collapsinglayoutlibrary;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.support.annotation.IntDef;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -27,6 +29,8 @@ public class CollapsingLayout extends RelativeLayout {
     }
 
     private int appBarLayoutVerticalOffset = 0;
+    private int appBarElevationStart = 0;
+    private int appBarElevationEnd = 0;
 
     OffsetChangedListener offsetChangedListener;
 
@@ -40,6 +44,10 @@ public class CollapsingLayout extends RelativeLayout {
 
     public CollapsingLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CollapsingLayout);
+        appBarElevationStart = typedArray.getDimensionPixelSize(R.styleable.CollapsingLayout_app_bar_elevation_start, 0);
+        appBarElevationEnd = typedArray.getDimensionPixelSize(R.styleable.CollapsingLayout_app_bar_elevation_end, 0);
+        typedArray.recycle();
         afterViews();
     }
 
@@ -132,11 +140,25 @@ public class CollapsingLayout extends RelativeLayout {
         @Override
         public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
             Log.d(TAG, "onOffsetChanged() called with: appBarLayout = [" + appBarLayout + "], verticalOffset = [" + verticalOffset + "]");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                changeAppBarLayout(appBarLayout, verticalOffset);
+            }
             for (int i = 0; i < getChildCount(); i++) {
                 View view = getChildAt(i);
                 changeChild(view, verticalOffset);
             }
 
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        private void changeAppBarLayout(AppBarLayout appBarLayout, int verticalOffset) {
+            float fraction = calculateFraction(verticalOffset);
+            float elevation = calculateElevation(appBarElevationStart, appBarElevationEnd, fraction);
+            appBarLayout.setElevation(elevation);
+        }
+
+        private float calculateElevation(int appBarElevationStart, int appBarElevationEnd, float fraction) {
+            return appBarElevationStart + (appBarElevationEnd - appBarElevationStart) * fraction;
         }
 
         private void changeChild(View view, int verticalOffset) {
@@ -159,7 +181,7 @@ public class CollapsingLayout extends RelativeLayout {
         }
 
         private float calculateFraction(int verticalOffset) {
-            Log.d(TAG, "calculateFraction: getHeight:"+getHeight()+",getMinimumHeight:"+getMinimumHeight()+",verticalOffset:"+verticalOffset);
+            Log.d(TAG, "calculateFraction: getHeight:" + getHeight() + ",getMinimumHeight:" + getMinimumHeight() + ",verticalOffset:" + verticalOffset);
             int all = getHeight() - getMinimumHeight();
             return Math.abs(verticalOffset) * 1f / all;
         }

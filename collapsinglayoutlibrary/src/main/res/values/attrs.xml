@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="CollapsingLayout">
+        <attr name="app_bar_elevation_start" format="dimension"/>
+        <attr name="app_bar_elevation_end" format="dimension"/>
+    </declare-styleable>
+
     <declare-styleable name="CollapsingLayout_Layout">
         <attr name="layout_shrinkMode">
             <enum name="none" value="0" />
