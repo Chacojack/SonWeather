@@ -13,4 +13,16 @@
         <item name="android:background">@color/transparent</item>
     </style>
 
+    <style name="divide">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/one_px</item>
+        <item name="android:background">@color/divide</item>
+    </style>
+
+    <style name="textView_style_normal">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/font_size_16</item>
+    </style>
+
 </resources>

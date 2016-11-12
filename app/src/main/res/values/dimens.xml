@@ -27,4 +27,17 @@
     <dimen name="dimen_16">16dp</dimen>
     <dimen name="one_dp">1dp</dimen>
     <dimen name="one_px">1px</dimen>
+    <dimen name="dimen_95">95dp</dimen>
+    <dimen name="dimen_252">252dp</dimen>
+    <dimen name="dimen_310">310dp</dimen>
+    <dimen name="font_size_35">35dp</dimen>
+    <dimen name="font_size_100">100dp</dimen>
+    <dimen name="font_size_14">14dp</dimen>
+    <dimen name="font_size_30">30dp</dimen>
+    <dimen name="font_size_17">17dp</dimen>
+    <dimen name="font_size_95">95dp</dimen>
+    <dimen name="dimen_4">4dp</dimen>
+    <dimen name="dimen_405">405dp</dimen>
+    <dimen name="dimen_215">215dp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
 </resources>
