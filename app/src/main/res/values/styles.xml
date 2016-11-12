@@ -26,4 +26,9 @@
         <item name="android:textSize">@dimen/font_size_16</item>
     </style>
 
+    <style name="textView_style_small_1" parent="textView_style_normal">
+        <item name="android:textSize">@dimen/font_size_12</item>
+    </style>
+
+
 </resources>

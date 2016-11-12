@@ -75,7 +75,8 @@
                 android:id="@+id/hour_weather_list"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_95"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"
+                />
 
             <RelativeLayout
                 android:id="@+id/header_bottom_bar"

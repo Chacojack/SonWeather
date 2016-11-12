@@ -8,16 +8,24 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jack.me.commonadapter.CommonAdapter;
+import jack.me.commonadapter.CommonViewHolder;
 import jack.me.sonweather.R;
 import jack.me.sonweather.component.DaggerWeatherViewComponent;
 import jack.me.sonweather.contract.WeatherContract;
@@ -26,7 +34,10 @@ import jack.me.sonweather.model.Alarm;
 import jack.me.sonweather.model.HourWeather;
 import jack.me.sonweather.model.SevenDayWeather;
 import jack.me.sonweather.model.Sun;
+import jack.me.sonweather.model.Weather;
 import jack.me.sonweather.module.WeatherViewModule;
+import jack.me.sonweather.utils.TimeUtils;
+import jack.me.sonweather.utils.WeatherUtils;
 
 public class WeatherActivity extends AppCompatActivity implements WeatherContract.IView {
 
@@ -59,6 +70,8 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     TextView txtSuggest;
     @BindView(R.id.detail_weather_list)
     RecyclerView detailWeatherList;
+
+    private CommonAdapter<Weather> hourWeatherAdapter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WeatherActivity.class);
@@ -102,6 +115,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         tintManager.setNavigationBarTintEnabled(true);
         tintManager.setTintColor(Color.parseColor("#00000000"));
         presenter.loadCurrentLocationWeather();
+        showHourWeather(null);
     }
 
     @Override
@@ -122,7 +136,45 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     @Override
     public void showHourWeather(HourWeather hourWeather) {
         // TODO: 2016/11/12 to show hour weather list
+        hourWeatherList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        hourWeatherList.setAdapter(hourWeatherAdapter = new CommonAdapter<Weather>(this, R.layout.vh_hour_weather) {
+            @Override
+            public void bind(CommonViewHolder holder, Weather weather, int position) {
+                if (position == 0) {
+                    View view = holder.getView(R.id.rl_root);
+                    RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
+                    layoutParams.leftMargin = getResources().getDimensionPixelSize(R.dimen.dimen_16);
+                } else if (position == hourWeatherAdapter.getItemCount() - 1) {
+                    View view = holder.getView(R.id.rl_root);
+                    RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
+                    layoutParams.rightMargin = getResources().getDimensionPixelSize(R.dimen.dimen_16);
+                }
+                holder.setText(R.id.txt_time, TimeUtils.getTwelveHour(weather.getDate()));
+                holder.setText(R.id.txt_temperature, weather.getDayTemperature() + "˚");
+                holder.setText(R.id.icon_state, WeatherUtils.getIconOfWeather(weather.getDayWeather(), weather.getDate()));
+            }
+        });
 
+        List<Weather> temp = new ArrayList<>();  // TODO: 2016/11/13 remove
+
+        temp.add(Weather.builder().date("2016-03-09 18:00:00").dayWeather("多云").dayTemperature("4").build());
+        temp.add(Weather.builder().date("2016-03-09 19:00:00").dayWeather("晴").dayTemperature("14").build());
+        temp.add(Weather.builder().date("2016-03-09 20:00:00").dayWeather("雨").dayTemperature("6").build());
+        temp.add(Weather.builder().date("2016-03-09 21:00:00").dayWeather("大雨").dayTemperature("24").build());
+        temp.add(Weather.builder().date("2016-03-09 22:00:00").dayWeather("雷阵雨").dayTemperature("-4").build());
+        temp.add(Weather.builder().date("2016-03-09 23:00:00").dayWeather("雾").dayTemperature("14").build());
+        temp.add(Weather.builder().date("2016-03-09 24:00:00").dayWeather("阴").dayTemperature("34").build());
+        temp.add(Weather.builder().date("2016-03-09 01:00:00").dayWeather("大雨").dayTemperature("2").build());
+        temp.add(Weather.builder().date("2016-03-09 02:00:00").dayWeather("雪").dayTemperature("7").build());
+        temp.add(Weather.builder().date("2016-03-09 03:00:00").dayWeather("雪").dayTemperature("8").build());
+        temp.add(Weather.builder().date("2016-03-09 04:00:00").dayWeather("雪").dayTemperature("0").build());
+        temp.add(Weather.builder().date("2016-03-09 05:00:00").dayWeather("晴").dayTemperature("-1").build());
+        temp.add(Weather.builder().date("2016-03-09 06:00:00").dayWeather("雪").dayTemperature("-6").build());
+        temp.add(Weather.builder().date("2016-03-09 07:00:00").dayWeather("雪").dayTemperature("10").build());
+        temp.add(Weather.builder().date("2016-03-09 08:00:00").dayWeather("晴").dayTemperature("18").build());
+
+        hourWeatherAdapter.addDatas(temp);
+        hourWeatherAdapter.notifyDataSetChanged();
     }
 
 
@@ -144,13 +196,9 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
 
 
     @Override
-    public void showAlarm(Alarm alarm){
+    public void showAlarm(Alarm alarm) {
         // TODO: 2016/11/12 to show alarm info
     }
-
-
-
-
 
 
 }

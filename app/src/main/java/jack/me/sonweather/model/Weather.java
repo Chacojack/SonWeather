@@ -2,12 +2,15 @@ package jack.me.sonweather.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
 /**
  * Created by zjchai on 2016/11/6.
  */
 @Data
+@Builder
 public class Weather {
 
     private static final String TAG = Weather.class.getSimpleName();
@@ -33,5 +36,7 @@ public class Weather {
     @SerializedName(value = "date",alternate = "sj")
     private String date;
 
-
+    @Tolerate
+    public Weather() {
+    }
 }

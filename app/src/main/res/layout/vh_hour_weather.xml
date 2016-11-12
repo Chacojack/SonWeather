@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_root"
+    android:layout_width="@dimen/dimen_70"
+    android:layout_height="@dimen/dimen_95"
+    android:padding="@dimen/dimen_8"
+    >
+
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        style="@style/textView_style_small_1"
+        android:text="下午10时"
+        />
+
+    <jack.me.sonweather.ui.view.AwesomeFontView
+        android:id="@+id/icon_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        style="@style/textView_style_normal"
+        android:text="@string/font_awesome_moon"
+        />
+
+    <TextView
+        android:id="@+id/txt_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        style="@style/textView_style_small_1"
+        android:text="9"
+        />
+
+</RelativeLayout>

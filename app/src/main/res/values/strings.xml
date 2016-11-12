@@ -3,4 +3,6 @@
     <string name="card_view">CardView</string>
     <string name="card_view_content"><![CDATA[CardView uses <code>elevation</code> property on Lollipop for shadows and falls back to a custom emulated shadow implementation on older platforms.]]></string>
     <string name="today">今天</string>
+    <string name="before_noon_time">上午%d时</string>
+    <string name="after_noon_time">下午%d时</string>
 </resources>
