@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actual_weather_rl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/red"
+    >
+
+    <TextView
+        android:id="@+id/actual_weather_city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="南京市"
+        android:textSize="@dimen/font_size_28"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/actual_weather_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actual_weather_city_name"
+        android:layout_centerHorizontal="true"
+        android:text="多云"
+        android:textSize="@dimen/font_size_16"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/actual_weather_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actual_weather_name"
+        android:layout_centerHorizontal="true"
+        android:text="7"
+        android:textSize="@dimen/font_size_90"
+        android:textColor="@color/white"
+        />
+
+</merge>

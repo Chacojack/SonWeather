@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CollapsingLayout_Layout">
+        <attr name="layout_shrinkMode">
+            <enum name="none" value="0" />
+            <enum name="pin" value="1" />
+            <enum name="parallax" value="2" />
+        </attr>
+        <attr name="layout_shrinkParallaxMultiplier" format="float" />
+        <attr name="alphaStart" format="float" />
+        <attr name="alphaEnd" format="float" />
+
+    </declare-styleable>
+
+</resources>
