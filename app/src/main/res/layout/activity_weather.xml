@@ -116,6 +116,7 @@
                     android:layout_marginRight="@dimen/dimen_16"
                     android:text="1"
                     style="@style/textView_style_normal"
+                    android:textColor="@color/white_50"
                     />
 
                 <TextView
@@ -176,7 +177,6 @@
                 android:paddingRight="@dimen/dimen_24"
                 android:paddingEnd="@dimen/dimen_24"
                 android:text="今天：现在晴朗。最高气温13度。今晚晴朗，最低气温1度。"
-                android:lineSpacingExtra="@dimen/dimen_4"
                 style="@style/textView_style_normal"
                 />
 

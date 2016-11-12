@@ -2,6 +2,11 @@ package jack.me.sonweather.contract;
 
 import android.app.Activity;
 
+import jack.me.sonweather.model.Air;
+import jack.me.sonweather.model.Alarm;
+import jack.me.sonweather.model.HourWeather;
+import jack.me.sonweather.model.SevenDayWeather;
+import jack.me.sonweather.model.Sun;
 import jack.me.sonweather.ui.activity.WeatherActivity;
 
 /**
@@ -12,6 +17,15 @@ public class WeatherContract {
 
     public interface IView{
 
+        void showHourWeather(HourWeather hourWeather);
+
+        void showWeekWeather(SevenDayWeather weather);
+
+        void showSun(Sun sun);
+
+        void showAir(Air air);
+
+        void showAlarm(Alarm alarm);
     }
 
     public interface IPresenter{

@@ -20,6 +20,7 @@
     </style>
 
     <style name="textView_style_normal">
+        <item name="android:lineSpacingExtra">@dimen/dimen_4</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/font_size_16</item>
