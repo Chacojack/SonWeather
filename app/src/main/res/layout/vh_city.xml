@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_root"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_80"
+    android:paddingLeft="@dimen/dimen_16"
+    android:paddingStart="@dimen/dimen_16"
+    android:paddingRight="@dimen/dimen_16"
+    android:paddingEnd="@dimen/dimen_16"
+    android:background="@color/bg_weather"
+    >
+
+    <TextView
+        android:id="@+id/txt_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/font_size_60"
+        android:text="16˚"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/txt_city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignBaseline="@+id/txt_temperature"
+        android:textSize="@dimen/font_size_30"
+        android:text="保定市"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_city_name"
+        android:textSize="@dimen/font_size_18"
+        android:text="下午11:12"
+        android:textColor="@color/white"
+        />
+
+</RelativeLayout>

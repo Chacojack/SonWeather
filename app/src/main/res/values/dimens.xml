@@ -50,6 +50,7 @@
     <dimen name="dimen_20">20dp</dimen>
     <dimen name="dimen_2">2dp</dimen>
     <dimen name="dimen_12">12dp</dimen>
+    <dimen name="font_size_60">60dp</dimen>
 
 
 </resources>
