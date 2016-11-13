@@ -84,7 +84,7 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
     private void initTabs(int childCount) {
         for (int i = 0; i < childCount; i++) {
             if (tabInjector != null) {
-                View view = tabInjector.onCreateTabView(i);
+                View view = tabInjector.onCreateTabView(this, i);
                 view.setSelected(false);
                 viewList.add(view);
                 addView(view);
@@ -92,15 +92,25 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
                 View view = inflate(getContext(), R.layout.default_tab, null);
                 view.setSelected(false);
                 viewList.add(view);
-                int viewSize = getResources().getDimensionPixelSize(R.dimen.dimen_8);
-                LayoutParams layoutParams = new LayoutParams(viewSize, viewSize);
-                int marginSize = getResources().getDimensionPixelSize(R.dimen.dimen_2);
-                layoutParams.setMargins(marginSize, marginSize, marginSize, marginSize);
+                LayoutParams layoutParams = getDefaultLayoutParams();
                 view.setLayoutParams(layoutParams);
                 addView(view);
             }
         }
         selected(currentSelected);
+    }
+
+    public void setTabInjector(ITabInjector tabInjector) {
+        this.tabInjector = tabInjector;
+    }
+
+    @NonNull
+    public LayoutParams getDefaultLayoutParams() {
+        int viewSize = getResources().getDimensionPixelSize(R.dimen.dimen_8);
+        LayoutParams layoutParams = new LayoutParams(viewSize, viewSize);
+        int marginSize = getResources().getDimensionPixelSize(R.dimen.dimen_2);
+        layoutParams.setMargins(marginSize, marginSize, marginSize, marginSize);
+        return layoutParams;
     }
 
     private void selected(@IntRange(from = 0) int position) {

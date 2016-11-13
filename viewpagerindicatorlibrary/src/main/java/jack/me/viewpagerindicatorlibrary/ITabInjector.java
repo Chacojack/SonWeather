@@ -11,6 +11,6 @@ import android.view.View;
 public interface ITabInjector {
 
     @NonNull
-    View onCreateTabView(@IntRange(from = 0) int position);
+    View onCreateTabView(ViewPagerIndicator viewPagerIndicator, @IntRange(from = 0) int position);
 
 }
