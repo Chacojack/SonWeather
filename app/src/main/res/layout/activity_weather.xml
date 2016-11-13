@@ -1,269 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_weather"
-    app:statusBarBackground="@color/transparent">
+    >
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
+        android:id="@+id/navigation_bar_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_405"
-        android:background="@color/transparent"
-        app:elevation="0dp">
-
-        <jack.me.collapsinglayoutlibrary.CollapsingLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:minHeight="@dimen/dimen_215"
-            app:app_bar_elevation_end="5dp"
-            app:app_bar_elevation_start="0dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-
-            <RelativeLayout
-                android:id="@+id/header_city_and_state"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_75"
-                app:layout_shrinkMode="parallax"
-                app:layout_shrinkParallaxMultiplier="0.8">
-
-                <TextView
-                    android:id="@+id/actual_weather_city_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:text="南京市"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_30" />
-
-                <TextView
-                    android:id="@+id/actual_weather_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/actual_weather_city_name"
-                    android:layout_centerHorizontal="true"
-                    style="@style/textView_style_normal"
-                    android:text="多云" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/header_city_and_state"
-                app:alphaEnd="0"
-                app:alphaStart="1"
-                app:layout_shrinkMode="parallax"
-                app:layout_shrinkParallaxMultiplier="0.6">
-
-                <TextView
-                    android:id="@+id/actual_weather_temperature"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:includeFontPadding="false"
-                    android:text="7"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_95" />
-
-            </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/hour_weather_list"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_95"
-                android:layout_alignParentBottom="true"
-                />
-
-            <RelativeLayout
-                android:id="@+id/header_bottom_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/hour_weather_list"
-                android:padding="@dimen/dimen_4"
-                app:alphaEnd="0">
-
-                <TextView
-                    android:id="@+id/txt_weekday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_16"
-                    android:layout_marginStart="@dimen/dimen_16"
-                    style="@style/textView_style_normal"
-                    android:text="星期六" />
-
-                <TextView
-                    android:id="@+id/txt_today"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_16"
-                    android:layout_marginStart="@dimen/dimen_16"
-                    android:layout_toEndOf="@id/txt_weekday"
-                    android:layout_toRightOf="@+id/txt_weekday"
-                    android:text="@string/today"
-                    style="@style/textView_style_normal"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_low_temperature"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="@dimen/dimen_16"
-                    android:layout_marginRight="@dimen/dimen_16"
-                    android:text="1"
-                    style="@style/textView_style_normal"
-                    android:textColor="@color/white_50"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_high_temperature"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dimen_16"
-                    android:layout_marginRight="@dimen/dimen_16"
-                    android:layout_toLeftOf="@+id/txt_low_temperature"
-                    android:layout_toStartOf="@+id/txt_low_temperature"
-                    android:text="12"
-                    style="@style/textView_style_normal" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/dimen_8"
+        android:paddingTop="@dimen/dimen_8"
+        android:paddingLeft="@dimen/dimen_16"
+        android:paddingStart="@dimen/dimen_16"
+        android:paddingRight="@dimen/dimen_16"
+        android:paddingEnd="@dimen/dimen_16"
+        >
 
 
-            </RelativeLayout>
-
-            <View
-                style="@style/divide"
-                android:layout_above="@+id/hour_weather_list" />
-
-            <View
-                style="@style/divide"
-                android:layout_alignParentBottom="true"
-                app:alphaEnd="0"
-                app:layout_shrinkMode="parallax"
-                app:layout_shrinkParallaxMultiplier="-0.02" />
-
-
-        </jack.me.collapsinglayoutlibrary.CollapsingLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/ll_city_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            >
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/week_weather_list"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_196" />
-
-            <View style="@style/divide" />
-
-            <TextView
-                android:id="@+id/txt_suggest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/dimen_8"
-                android:paddingBottom="@dimen/dimen_8"
-                android:paddingLeft="@dimen/dimen_24"
-                android:paddingStart="@dimen/dimen_24"
-                android:paddingRight="@dimen/dimen_24"
-                android:paddingEnd="@dimen/dimen_24"
-                android:text="今天：现在晴朗。最高气温13度。今晚晴朗，最低气温1度。"
-                style="@style/textView_style_normal"
+            <ImageView
+                android:layout_width="@dimen/dimen_8"
+                android:layout_height="@dimen/dimen_8"
+                android:layout_margin="@dimen/dimen_2"
+                android:src="@drawable/bg_location_radio_in_weather"
                 />
 
-            <View style="@style/divide" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_4"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_4"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/textView_style_normal"
-                            android:gravity="end"
-                            android:text="@string/sun_rise"
-                            />
-
-                        <TextView
-                            android:id="@+id/txt_sun_rise_time"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/textView_style_normal"
-                            android:text="上午6:32"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_4"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/textView_style_normal"
-                            android:gravity="end"
-                            android:text="@string/sun_set"
-                            />
-
-                        <TextView
-                            android:id="@+id/txt_sun_set_time"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/textView_style_normal"
-                            android:text="下午5:52"
-                            />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-                
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/weather_index_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_8"
-                    />
+            <ImageView
+                android:layout_width="@dimen/dimen_8"
+                android:layout_height="@dimen/dimen_8"
+                android:layout_margin="@dimen/dimen_2"
+                android:scaleType="center"
+                android:src="@drawable/bg_radio_in_weather"/>
 
 
 
-            </LinearLayout>
 
         </LinearLayout>
+        
+        <jack.me.sonweather.ui.view.AwesomeFontView
+            android:id="@+id/icon_city_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/font_awesome_list"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/white"
+            />
 
-    </android.support.v4.widget.NestedScrollView>
 
-</android.support.design.widget.CoordinatorLayout>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager_weather"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation_bar_container"
+        />
+
+    <View
+        style="@style/divide"
+        android:layout_above="@+id/navigation_bar_container"
+        />
+
+</RelativeLayout>
 
 
 

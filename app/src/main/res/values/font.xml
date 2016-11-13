@@ -7,4 +7,6 @@
     <string name="font_awesome_lightning">&#xf0e7;</string>
     <string name="font_awesome_moon">&#xf186;</string>
     <string name="font_awesome_snow">&#xf2dc;</string>
+    <string name="font_awesome_list">&#xf03a;</string>
+
 </resources>

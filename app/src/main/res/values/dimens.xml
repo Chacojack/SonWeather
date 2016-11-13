@@ -48,6 +48,8 @@
     <dimen name="dimen_28">28dp</dimen>
     <dimen name="dimen_48">48dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_2">2dp</dimen>
+    <dimen name="dimen_12">12dp</dimen>
 
 
 </resources>
