@@ -6,6 +6,11 @@
     <string name="before_noon_time">上午%d时</string>
     <string name="after_noon_time">下午%d时</string>
     <string name="temperature">%d˚</string>
+    <string name="sun_rise">日出：</string>
+    <string name="sun_set">日落：</string>
+    <string name="body_temperature">体感温度：</string>
+    <string name="get_cold">感冒：</string>
+    <string name="clothes">穿衣：</string>
     <string-array name="week_name">
         <item>星期日</item>
         <item>星期一</item>

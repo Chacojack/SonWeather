@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,6 +34,8 @@ import jack.me.sonweather.model.HourWeather;
 import jack.me.sonweather.model.SevenDayWeather;
 import jack.me.sonweather.model.Sun;
 import jack.me.sonweather.model.Weather;
+import jack.me.sonweather.model.WeatherIndex;
+import jack.me.sonweather.model.WeatherIndexs;
 import jack.me.sonweather.module.WeatherViewModule;
 import jack.me.sonweather.utils.TimeUtils;
 import jack.me.sonweather.utils.WeatherUtils;
@@ -68,11 +69,16 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     RecyclerView weekWeatherList;
     @BindView(R.id.txt_suggest)
     TextView txtSuggest;
-    @BindView(R.id.detail_weather_list)
-    RecyclerView detailWeatherList;
+    @BindView(R.id.txt_sun_rise_time)
+    TextView txtSunRiseTime;
+    @BindView(R.id.txt_sun_set_time)
+    TextView txtSunSetTime;
+    @BindView(R.id.weather_index_list)
+    RecyclerView weatherIndexList;
 
     private CommonAdapter<Weather> hourWeatherAdapter;
     private CommonAdapter<Weather> weekWeatherAdapter;
+    private CommonAdapter<WeatherIndex> weatherIndexAdapter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WeatherActivity.class);
@@ -118,6 +124,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         presenter.loadCurrentLocationWeather();
         showHourWeather(null);
         showWeekWeather(null);
+        showWeatherIndex(null);
     }
 
     @Override
@@ -216,7 +223,8 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
 
     @Override
     public void showSun(Sun sun) {
-        // TODO: 2016/11/12 to show sun info
+        // TODO: 2016/11/12 to show sun
+
     }
 
 
@@ -229,6 +237,31 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     @Override
     public void showAlarm(Alarm alarm) {
         // TODO: 2016/11/12 to show alarm info
+    }
+
+    @Override
+    public void showWeatherIndex(WeatherIndexs weatherIndexs) {
+        // TODO: 2016/11/13 show weather Index
+        weatherIndexList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        weatherIndexList.setAdapter(weatherIndexAdapter = new CommonAdapter<WeatherIndex>(this, R.layout.vh_weather_index) {
+            @Override
+            public void bind(CommonViewHolder holder, WeatherIndex weatherIndex, int position) {
+                holder.setText(R.id.txt_weather_index_name, weatherIndex.getType());
+                holder.setText(R.id.txt_weather_index_info, weatherIndex.getShortDesc());
+            }
+        });
+
+        List<WeatherIndex> list = new ArrayList<>();
+        list.add(WeatherIndex.builder().type("体感温度：").shortDesc("偏冷").build());
+        list.add(WeatherIndex.builder().type("感冒：").shortDesc("很容易发生").build());
+        list.add(WeatherIndex.builder().type("穿衣：").shortDesc("毛衣类衣物").build());
+        list.add(WeatherIndex.builder().type("运动：").shortDesc("不适宜").build());
+        list.add(WeatherIndex.builder().type("紫外线：").shortDesc("最弱").build());
+        list.add(WeatherIndex.builder().type("空调：").shortDesc("适合制热").build());
+
+        weatherIndexAdapter.addDatas(list);
+        weatherIndexAdapter.notifyDataSetChanged();
+
     }
 
 

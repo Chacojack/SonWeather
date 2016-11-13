@@ -7,6 +7,7 @@ import jack.me.sonweather.model.Alarm;
 import jack.me.sonweather.model.HourWeather;
 import jack.me.sonweather.model.SevenDayWeather;
 import jack.me.sonweather.model.Sun;
+import jack.me.sonweather.model.WeatherIndexs;
 import jack.me.sonweather.ui.activity.WeatherActivity;
 
 /**
@@ -26,6 +27,8 @@ public class WeatherContract {
         void showAir(Air air);
 
         void showAlarm(Alarm alarm);
+
+        void showWeatherIndex(WeatherIndexs weatherIndexs);
     }
 
     public interface IPresenter{

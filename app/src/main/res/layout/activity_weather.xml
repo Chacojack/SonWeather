@@ -183,10 +183,81 @@
 
             <View style="@style/divide" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/detail_weather_list"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/activity_weather_header_height" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_4"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_4"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/textView_style_normal"
+                            android:gravity="end"
+                            android:text="@string/sun_rise"
+                            />
+
+                        <TextView
+                            android:id="@+id/txt_sun_rise_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/textView_style_normal"
+                            android:text="上午6:32"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_4"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/textView_style_normal"
+                            android:gravity="end"
+                            android:text="@string/sun_set"
+                            />
+
+                        <TextView
+                            android:id="@+id/txt_sun_set_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/textView_style_normal"
+                            android:text="下午5:52"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/weather_index_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_8"
+                    />
+
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
