@@ -6,14 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -27,7 +24,6 @@ import butterknife.ButterKnife;
 import jack.me.sonweather.R;
 import jack.me.sonweather.ui.fregment.WeatherFragment;
 import jack.me.sonweather.ui.view.AwesomeFontView;
-import jack.me.viewpagerindicatorlibrary.ITabInjector;
 import jack.me.viewpagerindicatorlibrary.ViewPagerIndicator;
 
 public class WeatherActivity extends AppCompatActivity {
