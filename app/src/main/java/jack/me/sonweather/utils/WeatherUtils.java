@@ -2,16 +2,8 @@ package jack.me.sonweather.utils;
 
 import android.support.annotation.NonNull;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import jack.me.sonweather.R;
 import jack.me.sonweather.SonApplication;
-
-import static java.util.Calendar.HOUR_OF_DAY;
 
 /**
  * Created by zjchai on 2016/11/12.
@@ -85,9 +77,31 @@ public class WeatherUtils {
         return name.contains(RAIN_DAY);
     }
 
-    public static boolean isFineDay(@NonNull String name) {
+    private static boolean isFineDay(@NonNull String name) {
         return name.contains(FINE_DAY);
     }
 
+    public static String getTemperatureString(int temperature){
+        return String.format(SonApplication.INSTANCE.getString(R.string.temperature), temperature);
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

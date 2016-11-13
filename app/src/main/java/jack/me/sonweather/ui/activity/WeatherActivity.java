@@ -72,6 +72,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     RecyclerView detailWeatherList;
 
     private CommonAdapter<Weather> hourWeatherAdapter;
+    private CommonAdapter<Weather> weekWeatherAdapter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WeatherActivity.class);
@@ -116,6 +117,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         tintManager.setTintColor(Color.parseColor("#00000000"));
         presenter.loadCurrentLocationWeather();
         showHourWeather(null);
+        showWeekWeather(null);
     }
 
     @Override
@@ -153,7 +155,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
                     layoutParams.rightMargin = 0;
                 }
                 holder.setText(R.id.txt_time, TimeUtils.getTwelveHour(weather.getDate()));
-                holder.setText(R.id.txt_temperature, weather.getDayTemperature() + "˚");
+                holder.setText(R.id.txt_temperature, WeatherUtils.getTemperatureString(Integer.parseInt(weather.getDayTemperature())));
                 holder.setText(R.id.icon_state, WeatherUtils.getIconOfWeather(weather.getDayWeather(), weather.getDate()));
             }
         });
@@ -184,6 +186,28 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     @Override
     public void showWeekWeather(SevenDayWeather weather) {
         // TODO: 2016/11/12 to show weekWeather list
+        weekWeatherList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        weekWeatherList.setAdapter(weekWeatherAdapter = new CommonAdapter<Weather>(this, R.layout.vh_week_weather) {
+            @Override
+            public void bind(CommonViewHolder holder, Weather weather, int position) {
+                holder.setText(R.id.txt_week_name, TimeUtils.getWeekDayName(weather.getDate()));
+                holder.setText(R.id.txt_low_temperature, weather.getNightTemperature());
+                holder.setText(R.id.txt_high_temperature, weather.getDayTemperature());
+                holder.setText(R.id.icon_state, WeatherUtils.getIconOfWeather(weather.getDayWeather(), weather.getDate()));
+            }
+        });
+
+        List<Weather> list = new ArrayList<>();
+        list.add(Weather.builder().date("2016-03-09").dayWeather("多云").dayTemperature("6").nightTemperature("-2").build());
+        list.add(Weather.builder().date("2016-03-10").dayWeather("晴").dayTemperature("24").nightTemperature("-12").build());
+        list.add(Weather.builder().date("2016-03-11").dayWeather("雨").dayTemperature("30").nightTemperature("23").build());
+        list.add(Weather.builder().date("2016-03-12").dayWeather("阴").dayTemperature("35").nightTemperature("-12").build());
+        list.add(Weather.builder().date("2016-03-13").dayWeather("雪").dayTemperature("22").nightTemperature("2").build());
+        list.add(Weather.builder().date("2016-03-14").dayWeather("雾").dayTemperature("10").nightTemperature("-5").build());
+        list.add(Weather.builder().date("2016-03-15").dayWeather("雷阵雨").dayTemperature("20").nightTemperature("-9").build());
+
+        weekWeatherAdapter.addDatas(list);
+        weekWeatherAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -3,6 +3,7 @@ package jack.me.sonweather.utils;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,7 +23,13 @@ public class TimeUtils {
 
     private static final String TAG = TimeUtils.class.getSimpleName();
 
-    private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String FULL_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String DAY_PATTERN = "yyyy-MM-dd";
+    private static final String HOUR_PATTERN = "HH:mm:ss";
+    public static final int DAY_PATTERN_LENGTH = 10;
+    public static final int HOUR_PATTERN_LENGTH = 8;
+    public static final int FULL_PATTERN_LENGTH = 19;
+
 
     public static String getTwelveHour(@NonNull String time) {
         Calendar calendar = getDateFormString(time);
@@ -38,7 +45,7 @@ public class TimeUtils {
         }
     }
 
-    public static boolean isDay(@NonNull String time) {
+    static boolean isDay(@NonNull String time) {
         Calendar calendar = getDateFormString(time);
         if (calendar != null) {
             int hour = calendar.get(HOUR_OF_DAY);
@@ -57,11 +64,14 @@ public class TimeUtils {
     }
 
 
-    public static Calendar getDateFormString(@NonNull String time) {
-        SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN);
-        Date date = null;
+    private static Calendar getDateFormString(@NonNull String time) {
+        time = time.trim();
+        DateFormat format = getDateFormatFormTime(time);
+        if (format == null) {
+            return null;
+        }
         try {
-            date = format.parse(time.trim());
+            Date date = format.parse(time);
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(date);
             return calendar;
@@ -70,5 +80,36 @@ public class TimeUtils {
             return null;
         }
     }
+
+    private static DateFormat getDateFormatFormTime(String time) {
+        time = time.trim();
+        switch (time.length()) {
+            case DAY_PATTERN_LENGTH:
+                return new SimpleDateFormat(DAY_PATTERN);
+            case HOUR_PATTERN_LENGTH:
+                return new SimpleDateFormat(HOUR_PATTERN);
+            case FULL_PATTERN_LENGTH:
+                return new SimpleDateFormat(FULL_PATTERN);
+            default:
+                return null;
+        }
+    }
+
+    public static String getWeekDayName(String time) {
+        Calendar calendar = getDateFormString(time);
+        String[] weekArray = SonApplication.INSTANCE.getResources().getStringArray(R.array.week_name);
+        if (calendar != null) {
+            int week = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+            if (week >= 0 && weekArray.length > week) {
+                return weekArray[week];
+            } else {
+                return weekArray[0];
+            }
+        } else {
+            return weekArray[0];
+        }
+
+    }
+
 
 }
