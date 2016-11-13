@@ -85,6 +85,20 @@ public class WeatherUtils {
         return String.format(SonApplication.INSTANCE.getString(R.string.temperature), temperature);
     }
 
+    public static int getWeatherIconColor(@NonNull String icon){
+        if (SonApplication.INSTANCE.getString(R.string.font_awesome_sun).equals(icon)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.sun_yellow);
+        } else if (SonApplication.INSTANCE.getResources().getString(R.string.font_awesome_moon).equals(icon)){
+            return SonApplication.INSTANCE.getResources().getColor(R.color.moon_yellow);
+        } else if (SonApplication.INSTANCE.getResources().getString(R.string.font_awesome_lightning).equals(icon)){
+            return SonApplication.INSTANCE.getResources().getColor(R.color.lightning_yellow);
+        } else if (SonApplication.INSTANCE.getResources().getString(R.string.font_awesome_rain).equals(icon)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.rain_blue);
+        } else {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.white);
+        }
+    }
+
 }
 
 

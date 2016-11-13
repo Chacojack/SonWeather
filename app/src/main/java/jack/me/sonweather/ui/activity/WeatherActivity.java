@@ -156,7 +156,9 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
                 }
                 holder.setText(R.id.txt_time, TimeUtils.getTwelveHour(weather.getDate()));
                 holder.setText(R.id.txt_temperature, WeatherUtils.getTemperatureString(Integer.parseInt(weather.getDayTemperature())));
-                holder.setText(R.id.icon_state, WeatherUtils.getIconOfWeather(weather.getDayWeather(), weather.getDate()));
+                String iconOfWeather = WeatherUtils.getIconOfWeather(weather.getDayWeather(), weather.getDate());
+                holder.setText(R.id.icon_state, iconOfWeather);
+                holder.setTextColor(R.id.icon_state, WeatherUtils.getWeatherIconColor(iconOfWeather));
             }
         });
 
@@ -193,7 +195,9 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
                 holder.setText(R.id.txt_week_name, TimeUtils.getWeekDayName(weather.getDate()));
                 holder.setText(R.id.txt_low_temperature, weather.getNightTemperature());
                 holder.setText(R.id.txt_high_temperature, weather.getDayTemperature());
-                holder.setText(R.id.icon_state, WeatherUtils.getIconOfWeather(weather.getDayWeather(), weather.getDate()));
+                String iconOfWeather = WeatherUtils.getIconOfWeather(weather.getDayWeather(), weather.getDate());
+                holder.setText(R.id.icon_state, iconOfWeather);
+                holder.setTextColor(R.id.icon_state, WeatherUtils.getWeatherIconColor(iconOfWeather));
             }
         });
 

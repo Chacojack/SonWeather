@@ -11,5 +11,8 @@
     <color name="divide">#B2FFFFFF</color>
     <color name="white_70">#B2FFFFFF</color>
     <color name="white_50">#88FFFFFF</color>
-    <color name="sun_yellow">#FFFF00</color>
+    <color name="sun_yellow">#ffcc00</color>
+    <color name="moon_yellow">#ffff66</color>
+    <color name="lightning_yellow">#ffff00</color>
+    <color name="rain_blue">#66ccff</color>
 </resources>
