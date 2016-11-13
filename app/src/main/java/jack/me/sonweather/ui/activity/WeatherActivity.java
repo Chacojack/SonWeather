@@ -140,14 +140,17 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         hourWeatherList.setAdapter(hourWeatherAdapter = new CommonAdapter<Weather>(this, R.layout.vh_hour_weather) {
             @Override
             public void bind(CommonViewHolder holder, Weather weather, int position) {
+                View view = holder.getView(R.id.rl_root);
+                RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
                 if (position == 0) {
-                    View view = holder.getView(R.id.rl_root);
-                    RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
                     layoutParams.leftMargin = getResources().getDimensionPixelSize(R.dimen.dimen_16);
+                    layoutParams.rightMargin = 0;
                 } else if (position == hourWeatherAdapter.getItemCount() - 1) {
-                    View view = holder.getView(R.id.rl_root);
-                    RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
+                    layoutParams.leftMargin = 0;
                     layoutParams.rightMargin = getResources().getDimensionPixelSize(R.dimen.dimen_16);
+                } else {
+                    layoutParams.leftMargin = 0;
+                    layoutParams.rightMargin = 0;
                 }
                 holder.setText(R.id.txt_time, TimeUtils.getTwelveHour(weather.getDate()));
                 holder.setText(R.id.txt_temperature, weather.getDayTemperature() + "˚");
