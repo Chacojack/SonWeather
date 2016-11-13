@@ -62,17 +62,10 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':collapsinglayoutlibrary')
     compile project(':commonadapterlibrary')
+    compile project(':viewpagerindicatorlibrary')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    // butter knife View framework
-    // dagger DI framework
-    // Rx Java and Android
-    // Rx Retrofit
-    // lombok
-    // ormlite
-    // debug tool
-    // status color
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.jakewharton:butterknife:8.4.0'
     compile 'com.google.dagger:dagger:2.7'

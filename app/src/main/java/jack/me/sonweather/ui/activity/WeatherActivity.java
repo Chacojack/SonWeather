@@ -9,11 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -26,21 +23,22 @@ import butterknife.ButterKnife;
 import jack.me.sonweather.R;
 import jack.me.sonweather.ui.fregment.WeatherFragment;
 import jack.me.sonweather.ui.view.AwesomeFontView;
+import jack.me.viewpagerindicatorlibrary.ViewPagerIndicator;
 
 public class WeatherActivity extends AppCompatActivity {
 
     private static final String TAG = WeatherActivity.class.getSimpleName();
 
-    @BindView(R.id.ll_city_list)
-    LinearLayout llCityList;
+
+    WeatherFragmentPagerAdapter pagerAdapter;
+    @BindView(R.id.view_pager_indicator)
+    ViewPagerIndicator viewPagerIndicator;
     @BindView(R.id.icon_city_list)
     AwesomeFontView iconCityList;
     @BindView(R.id.navigation_bar_container)
     RelativeLayout navigationBarContainer;
     @BindView(R.id.view_pager_weather)
     ViewPager viewPagerWeather;
-
-    WeatherFragmentPagerAdapter pagerAdapter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WeatherActivity.class);
@@ -83,6 +81,7 @@ public class WeatherActivity extends AppCompatActivity {
         tintManager.setNavigationBarTintEnabled(true);
         tintManager.setTintColor(Color.parseColor("#00000000"));
 
+        viewPagerIndicator.setViewPager(viewPagerWeather);
         initViewPager();
     }
 
@@ -100,7 +99,7 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
 
-    class WeatherFragmentPagerAdapter extends FragmentPagerAdapter{
+    class WeatherFragmentPagerAdapter extends FragmentPagerAdapter {
 
         List<Fragment> fragments = new ArrayList<>();
 
@@ -118,14 +117,14 @@ public class WeatherActivity extends AppCompatActivity {
             return fragments.size();
         }
 
-        public void addFragment(Fragment fragment){
+        public void addFragment(Fragment fragment) {
             if (fragments.contains(fragment)) {
                 return;
             }
             fragments.add(fragment);
         }
 
-        public void removeFragment(Fragment fragment){
+        public void removeFragment(Fragment fragment) {
             if (fragments.contains(fragment)) {
                 fragments.remove(fragment);
             }

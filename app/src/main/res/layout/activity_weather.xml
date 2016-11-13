@@ -18,34 +18,12 @@
         android:paddingEnd="@dimen/dimen_16"
         >
 
-
-
-        <LinearLayout
-            android:id="@+id/ll_city_list"
+        <jack.me.viewpagerindicatorlibrary.ViewPagerIndicator
+            android:id="@+id/view_pager_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            >
-
-            <ImageView
-                android:layout_width="@dimen/dimen_8"
-                android:layout_height="@dimen/dimen_8"
-                android:layout_margin="@dimen/dimen_2"
-                android:src="@drawable/bg_location_radio_in_weather"
-                />
-
-            <ImageView
-                android:layout_width="@dimen/dimen_8"
-                android:layout_height="@dimen/dimen_8"
-                android:layout_margin="@dimen/dimen_2"
-                android:scaleType="center"
-                android:src="@drawable/bg_radio_in_weather"/>
-
-
-
-
-        </LinearLayout>
+            />
         
         <jack.me.sonweather.ui.view.AwesomeFontView
             android:id="@+id/icon_city_list"
