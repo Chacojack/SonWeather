@@ -18,7 +18,7 @@
             android:minHeight="@dimen/dimen_215"
             app:app_bar_elevation_end="5dp"
             app:app_bar_elevation_start="0dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <RelativeLayout
                 android:id="@+id/header_city_and_state"
