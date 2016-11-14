@@ -15,4 +15,12 @@
     <color name="moon_yellow">#ffff66</color>
     <color name="lightning_yellow">#ffff00</color>
     <color name="rain_blue">#66ccff</color>
+    <array name="bg_weather_colors">
+        <item>#ff6600</item>
+        <item>#3333ff</item>
+        <item>#996633</item>
+        <item>#009933</item>
+        <item>#cc00ff</item>
+    </array>
+
 </resources>

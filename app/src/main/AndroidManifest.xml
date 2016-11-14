@@ -35,7 +35,7 @@
         <activity
             android:name=".ui.activity.WeatherActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppNoStateTitleTheme">
+            android:theme="@style/AppNoStateTitleTransparentTheme">
         </activity>
 
         <service android:name="com.amap.api.location.APSService" />

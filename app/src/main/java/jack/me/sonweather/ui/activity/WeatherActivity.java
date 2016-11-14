@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,6 +50,9 @@ public class WeatherActivity extends AppCompatActivity {
     NativeTransitionLayout nativeTransitionLayout;
     @BindView(R.id.weather_view_pager_container)
     RelativeLayout weatherViewPagerContainer;
+
+    @BindArray(R.array.bg_weather_colors)
+    int[] color;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WeatherActivity.class);
@@ -106,9 +111,12 @@ public class WeatherActivity extends AppCompatActivity {
 
         // TODO: 2016/11/14 remove
         for (int i = 0; i < nativeTransitionLayout.getChildCount(); i++) {
-            nativeTransitionLayout.getChildAt(i).setOnClickListener(v -> nativeTransitionLayout.startStretchTransition(v));
+            View view = nativeTransitionLayout.getChildAt(i);
+            view.setOnClickListener(v -> nativeTransitionLayout.startStretchTransition(v));
+            view.setBackgroundColor(color[i]);
         }
-        nativeTransitionLayout.setOnSelectedAnchorListener((anchor, position) -> viewPagerWeather.setCurrentItem(position, false))
+        nativeTransitionLayout
+                .setOnSelectedAnchorListener((anchor, position) -> viewPagerWeather.setCurrentItem(position, false))
                 .setOnAnimationListener(anchor -> {
                     weatherViewPagerContainer.setTop(anchor.getTop());
                     weatherViewPagerContainer.setBottom(anchor.getBottom());
@@ -124,10 +132,17 @@ public class WeatherActivity extends AppCompatActivity {
                         weatherViewPagerContainer.requestLayout();
                     }
                 });
+        weatherViewPagerContainer.setBackgroundColor(color[0]);
     }
 
     private void initViewPager() {
         viewPagerWeather.setAdapter(pagerAdapter = new WeatherFragmentPagerAdapter(getSupportFragmentManager()));
+        viewPagerWeather.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                weatherViewPagerContainer.setBackgroundColor(color[position]);
+            }
+        });
 
         pagerAdapter.addFragment(new WeatherFragment());
         pagerAdapter.addFragment(new WeatherFragment());
@@ -136,6 +151,7 @@ public class WeatherActivity extends AppCompatActivity {
         pagerAdapter.addFragment(new WeatherFragment());
 
         pagerAdapter.notifyDataSetChanged();
+        viewPagerWeather.setCurrentItem(0, false);
 
     }
 
