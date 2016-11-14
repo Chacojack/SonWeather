@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -21,6 +23,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout;
 import jack.me.sonweather.R;
 import jack.me.sonweather.ui.fregment.WeatherFragment;
 import jack.me.sonweather.ui.view.AwesomeFontView;
@@ -40,6 +44,10 @@ public class WeatherActivity extends AppCompatActivity {
     RelativeLayout navigationBarContainer;
     @BindView(R.id.view_pager_weather)
     ViewPager viewPagerWeather;
+    @BindView(R.id.native_transition_layout)
+    NativeTransitionLayout nativeTransitionLayout;
+    @BindView(R.id.weather_view_pager_container)
+    RelativeLayout weatherViewPagerContainer;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WeatherActivity.class);
@@ -86,7 +94,7 @@ public class WeatherActivity extends AppCompatActivity {
         viewPagerIndicator.setTabInjector((viewPagerIndicator, position) -> {
             ImageView imageView = new ImageView(this);
             imageView.setLayoutParams(viewPagerIndicator.getDefaultLayoutParams());
-            if (position==0) {
+            if (position == 0) {
                 imageView.setImageResource(R.drawable.bg_location_radio_in_weather);
             } else {
                 imageView.setScaleType(ImageView.ScaleType.CENTER);
@@ -95,6 +103,27 @@ public class WeatherActivity extends AppCompatActivity {
             return imageView;
         });
         initViewPager();
+
+        // TODO: 2016/11/14 remove
+        for (int i = 0; i < nativeTransitionLayout.getChildCount(); i++) {
+            nativeTransitionLayout.getChildAt(i).setOnClickListener(v -> nativeTransitionLayout.startStretchTransition(v));
+        }
+        nativeTransitionLayout.setOnSelectedAnchorListener((anchor, position) -> viewPagerWeather.setCurrentItem(position, false))
+                .setOnAnimationListener(anchor -> {
+                    weatherViewPagerContainer.setTop(anchor.getTop());
+                    weatherViewPagerContainer.setBottom(anchor.getBottom());
+                })
+                .setOnAnimationEndListener((anchor, isShrink) -> {
+                    if (isShrink) {
+                        weatherViewPagerContainer.setTop(anchor.getTop());
+                        weatherViewPagerContainer.setBottom(anchor.getBottom());
+                    } else {
+                        ViewGroup.LayoutParams layoutParams = weatherViewPagerContainer.getLayoutParams();
+                        layoutParams.height = ViewPager.LayoutParams.MATCH_PARENT;
+                        layoutParams.width = ViewPager.LayoutParams.MATCH_PARENT;
+                        weatherViewPagerContainer.requestLayout();
+                    }
+                });
     }
 
     private void initViewPager() {
@@ -108,6 +137,12 @@ public class WeatherActivity extends AppCompatActivity {
 
         pagerAdapter.notifyDataSetChanged();
 
+    }
+
+    @OnClick(R.id.icon_city_list)
+    public void onCityListIconClick() {
+        int currentItem = viewPagerWeather.getCurrentItem();
+        nativeTransitionLayout.startShrinkTransition(currentItem);
     }
 
 

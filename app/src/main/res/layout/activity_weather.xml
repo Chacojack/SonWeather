@@ -6,50 +6,99 @@
     >
 
     <RelativeLayout
-        android:id="@+id/navigation_bar_container"
+        android:id="@+id/weather_view_pager_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="@dimen/dimen_8"
-        android:paddingTop="@dimen/dimen_8"
-        android:paddingLeft="@dimen/dimen_16"
-        android:paddingStart="@dimen/dimen_16"
-        android:paddingRight="@dimen/dimen_16"
-        android:paddingEnd="@dimen/dimen_16"
-        >
+        android:layout_height="match_parent">
 
-        <jack.me.viewpagerindicatorlibrary.ViewPagerIndicator
-            android:id="@+id/view_pager_indicator"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/navigation_bar_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            />
-        
-        <jack.me.sonweather.ui.view.AwesomeFontView
-            android:id="@+id/icon_city_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:text="@string/font_awesome_list"
-            android:textSize="@dimen/font_size_16"
-            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="@dimen/dimen_8"
+            android:paddingTop="@dimen/dimen_8"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingStart="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:paddingEnd="@dimen/dimen_16"
+            >
+
+            <jack.me.viewpagerindicatorlibrary.ViewPagerIndicator
+                android:id="@+id/view_pager_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                />
+
+            <jack.me.sonweather.ui.view.AwesomeFontView
+                android:id="@+id/icon_city_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/font_awesome_list"
+                android:textSize="@dimen/font_size_16"
+                android:textColor="@color/white"
+                />
+
+        </RelativeLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/navigation_bar_container"
             />
 
+        <View
+            style="@style/divide"
+            android:layout_above="@+id/navigation_bar_container"
+            />
 
     </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager_weather"
+    
+    <jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout
+        android:id="@+id/native_transition_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/navigation_bar_container"
-        />
+        android:orientation="vertical"
+        android:visibility="invisible"
+        >
 
-    <View
-        style="@style/divide"
-        android:layout_above="@+id/navigation_bar_container"
-        />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/red"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/green"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/moon_yellow"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorAccent"
+            />
+
+    </jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout>
+
 
 </RelativeLayout>
 

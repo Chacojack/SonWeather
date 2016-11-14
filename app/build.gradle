@@ -63,6 +63,7 @@ dependencies {
     compile project(':collapsinglayoutlibrary')
     compile project(':commonadapterlibrary')
     compile project(':viewpagerindicatorlibrary')
+    compile project(':nativetransitionlayoutlibrary')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

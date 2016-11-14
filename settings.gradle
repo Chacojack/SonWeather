@@ -1,1 +1,1 @@
-include ':app', ':collapsinglayoutlibrary', ':commonadapterlibrary', ':viewpagerindicatorlibrary'
+include ':app', ':collapsinglayoutlibrary', ':commonadapterlibrary', ':viewpagerindicatorlibrary', ':nativetransitionlayoutlibrary'
