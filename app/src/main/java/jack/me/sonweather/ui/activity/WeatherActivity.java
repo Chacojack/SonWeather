@@ -27,11 +27,13 @@ import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jack.me.fixdrawsizerelativelayoutlibrary.FixDrawSizeRelativeLayout;
 import jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout;
 import jack.me.sonweather.R;
 import jack.me.sonweather.ui.BackgroundDrawable;
 import jack.me.sonweather.ui.fregment.WeatherFragment;
 import jack.me.sonweather.ui.view.AwesomeFontView;
+import jack.me.sonweather.utils.LogUtils;
 import jack.me.viewpagerindicatorlibrary.ViewPagerIndicator;
 
 public class WeatherActivity extends AppCompatActivity {
@@ -51,7 +53,7 @@ public class WeatherActivity extends AppCompatActivity {
     @BindView(R.id.native_transition_layout)
     NativeTransitionLayout nativeTransitionLayout;
     @BindView(R.id.weather_view_pager_container)
-    RelativeLayout weatherViewPagerContainer;
+    FixDrawSizeRelativeLayout weatherViewPagerContainer;
 
     @BindArray(R.array.bg_weather_colors)
     int[] color;
@@ -123,19 +125,24 @@ public class WeatherActivity extends AppCompatActivity {
             view.setBackgroundColor(color[i]);
         }
         nativeTransitionLayout
-                .setOnSelectedAnchorListener((anchor, position) -> viewPagerWeather.setCurrentItem(position, false))
+                .setOnSelectedAnchorListener((anchor, position) -> {
+                    viewPagerWeather.setCurrentItem(position, false);
+                    LogUtils.dFormat(TAG, "afterViews : on Selected position :%d, anchor height:%d,container height:%d", position, anchor.getHeight(), weatherViewPagerContainer.getHeight());
+                })
                 .setOnAnimationListener(anchor -> {
-                    weatherViewPagerContainer.setTop(anchor.getTop());
-                    weatherViewPagerContainer.setBottom(anchor.getBottom());
+                    LogUtils.dFormat(TAG, "afterViews : container height:%d ", weatherViewPagerContainer.getHeight());
+                    weatherViewPagerContainer.setFixTop(anchor.getTop());
+                    weatherViewPagerContainer.setFixBottom(anchor.getBottom());
                 })
                 .setOnAnimationEndListener((anchor, isShrink) -> {
+                    LogUtils.dFormat(TAG, "afterViews : on animator end isShrink :%s", isShrink);
                     if (isShrink) {
-                        weatherViewPagerContainer.setTop(anchor.getTop());
-                        weatherViewPagerContainer.setBottom(anchor.getBottom());
+                        weatherViewPagerContainer.setFixTop(anchor.getTop());
+                        weatherViewPagerContainer.setFixBottom(anchor.getBottom());
                     } else {
                         ViewGroup.LayoutParams layoutParams = weatherViewPagerContainer.getLayoutParams();
-                        layoutParams.height = ViewPager.LayoutParams.MATCH_PARENT;
-                        layoutParams.width = ViewPager.LayoutParams.MATCH_PARENT;
+                        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
                         weatherViewPagerContainer.requestLayout();
                     }
                 });

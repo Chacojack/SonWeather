@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <RelativeLayout
+    <jack.me.fixdrawsizerelativelayoutlibrary.FixDrawSizeRelativeLayout
         android:id="@+id/weather_view_pager_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -61,7 +61,7 @@
             android:layout_above="@+id/navigation_bar_container"
             />
 
-    </RelativeLayout>
+    </jack.me.fixdrawsizerelativelayoutlibrary.FixDrawSizeRelativeLayout>
 
     
     <jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout

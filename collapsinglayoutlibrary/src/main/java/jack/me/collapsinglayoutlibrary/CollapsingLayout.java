@@ -147,7 +147,6 @@ public class CollapsingLayout extends RelativeLayout {
                 View view = getChildAt(i);
                 changeChild(view, verticalOffset);
             }
-
         }
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -172,7 +171,6 @@ public class CollapsingLayout extends RelativeLayout {
             float alphaEnd = layoutParams.alphaEnd;
             float fraction = calculateFraction(verticalOffset);
             float alpha = calculateAlpha(alphaStart, alphaEnd, fraction);
-            Log.d(TAG, "changeChildAlpha: fraction:" + fraction + "alpha:" + alpha);
             view.setAlpha(alpha);
         }
 
@@ -181,7 +179,6 @@ public class CollapsingLayout extends RelativeLayout {
         }
 
         private float calculateFraction(int verticalOffset) {
-            Log.d(TAG, "calculateFraction: getHeight:" + getHeight() + ",getMinimumHeight:" + getMinimumHeight() + ",verticalOffset:" + verticalOffset);
             int all = getHeight() - getMinimumHeight();
             return Math.abs(verticalOffset) * 1f / all;
         }

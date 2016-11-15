@@ -64,6 +64,7 @@ dependencies {
     compile project(':commonadapterlibrary')
     compile project(':viewpagerindicatorlibrary')
     compile project(':nativetransitionlayoutlibrary')
+    compile project(':fixdrawsizerelativelayoutlibrary')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
