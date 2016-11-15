@@ -2,16 +2,17 @@ package jack.me.sonweather.ui.activity;
 
 import android.app.Application;
 import android.app.Service;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout;
 import jack.me.sonweather.R;
+import jack.me.sonweather.ui.BackgroundDrawable;
 import jack.me.sonweather.ui.fregment.WeatherFragment;
 import jack.me.sonweather.ui.view.AwesomeFontView;
 import jack.me.viewpagerindicatorlibrary.ViewPagerIndicator;
@@ -53,6 +55,10 @@ public class WeatherActivity extends AppCompatActivity {
 
     @BindArray(R.array.bg_weather_colors)
     int[] color;
+    @BindView(R.id.rl_root)
+    RelativeLayout rlRoot;
+    @BindView(R.id.img_background)
+    ImageView imgBackground;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WeatherActivity.class);
@@ -108,6 +114,7 @@ public class WeatherActivity extends AppCompatActivity {
             return imageView;
         });
         initViewPager();
+        initBackGround();
 
         // TODO: 2016/11/14 remove
         for (int i = 0; i < nativeTransitionLayout.getChildCount(); i++) {
@@ -133,6 +140,12 @@ public class WeatherActivity extends AppCompatActivity {
                     }
                 });
         weatherViewPagerContainer.setBackgroundColor(color[0]);
+    }
+
+    private void initBackGround() {
+        Drawable drawable = WallpaperManager.getInstance(this).getFastDrawable();
+        imgBackground.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imgBackground.setImageDrawable(new BackgroundDrawable(drawable, 0xb2000000));
     }
 
     private void initViewPager() {

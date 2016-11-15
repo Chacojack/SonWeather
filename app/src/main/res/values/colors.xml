@@ -15,6 +15,7 @@
     <color name="moon_yellow">#ffff66</color>
     <color name="lightning_yellow">#ffff00</color>
     <color name="rain_blue">#66ccff</color>
+    <color name="black_50">#88000000</color>
     <array name="bg_weather_colors">
         <item>#ff6600</item>
         <item>#3333ff</item>
