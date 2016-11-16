@@ -27,8 +27,6 @@ public class WeatherUtils {
     private static final String SNOW = "雪";
 
 
-
-
     public static String getIconOfWeather(@NonNull String name, @NonNull String time) {
         if (isFineDay(name)) {
             if (TimeUtils.isDay(time)) {
@@ -56,7 +54,6 @@ public class WeatherUtils {
     }
 
 
-
     private static boolean isSnowDay(@NonNull String name) {
         return name.contains(SNOW);
     }
@@ -73,6 +70,14 @@ public class WeatherUtils {
         return name.contains(CLOUD_DAY) || name.contains(OVERCAST);
     }
 
+    private static boolean isCloudDayOnly(@NonNull String name) {
+        return name.contains(CLOUD_DAY);
+    }
+
+    private static boolean isOvercastOnly(@NonNull String name) {
+        return name.contains(OVERCAST);
+    }
+
     private static boolean isRainDay(@NonNull String name) {
         return name.contains(RAIN_DAY);
     }
@@ -81,16 +86,16 @@ public class WeatherUtils {
         return name.contains(FINE_DAY);
     }
 
-    public static String getTemperatureString(int temperature){
+    public static String getTemperatureString(int temperature) {
         return String.format(SonApplication.INSTANCE.getString(R.string.temperature), temperature);
     }
 
-    public static int getWeatherIconColor(@NonNull String icon){
+    public static int getWeatherIconColor(@NonNull String icon) {
         if (SonApplication.INSTANCE.getString(R.string.font_awesome_sun).equals(icon)) {
             return SonApplication.INSTANCE.getResources().getColor(R.color.sun_yellow);
-        } else if (SonApplication.INSTANCE.getResources().getString(R.string.font_awesome_moon).equals(icon)){
+        } else if (SonApplication.INSTANCE.getResources().getString(R.string.font_awesome_moon).equals(icon)) {
             return SonApplication.INSTANCE.getResources().getColor(R.color.moon_yellow);
-        } else if (SonApplication.INSTANCE.getResources().getString(R.string.font_awesome_lightning).equals(icon)){
+        } else if (SonApplication.INSTANCE.getResources().getString(R.string.font_awesome_lightning).equals(icon)) {
             return SonApplication.INSTANCE.getResources().getColor(R.color.lightning_yellow);
         } else if (SonApplication.INSTANCE.getResources().getString(R.string.font_awesome_rain).equals(icon)) {
             return SonApplication.INSTANCE.getResources().getColor(R.color.rain_blue);
@@ -98,6 +103,43 @@ public class WeatherUtils {
             return SonApplication.INSTANCE.getResources().getColor(R.color.white);
         }
     }
+
+    public static int getWeatherBackgroundColor(@NonNull String name) {
+        if (isFineDay(name)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.fine_day);
+        }
+        if (isLightningDay(name)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.lightning);
+        }
+        if (isRainDay(name)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.rain_day);
+        }
+        if (isCloudDayOnly(name)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.cloud_day);
+        }
+        if (isOvercastOnly(name)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.overcast);
+        }
+        if (isFogDayOnly(name)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.fog);
+        }
+        if (isHazeDayOnly(name)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.haze);
+        }
+        if (isSnowDay(name)) {
+            return SonApplication.INSTANCE.getResources().getColor(R.color.snow);
+        }
+        return SonApplication.INSTANCE.getResources().getColor(R.color.fine_day);
+    }
+
+    private static boolean isHazeDayOnly(String name) {
+        return name.contains(HAZE);
+    }
+
+    private static boolean isFogDayOnly(@NonNull String name) {
+        return name.contains(FOG);
+    }
+
 
 }
 

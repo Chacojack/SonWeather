@@ -16,6 +16,15 @@
     <color name="lightning_yellow">#ffff00</color>
     <color name="rain_blue">#66ccff</color>
     <color name="black_50">#88000000</color>
+    <color name="fine_day">#00ccff</color>
+    <color name="rain_day">#3333cc</color>
+    <color name="cloud_day">#666699</color>
+    <color name="overcast">#8B7D6B</color>
+    <color name="lightning">#9933ff</color>
+    <color name="fog">#66cc00</color>
+    <color name="haze">#cc6633</color>
+    <color name="snow">#00ffff</color>
+    <color name="default_color">#3333ff</color>
     <array name="bg_weather_colors">
         <item>#ff6600</item>
         <item>#3333ff</item>

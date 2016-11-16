@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -30,10 +31,14 @@ import butterknife.OnClick;
 import jack.me.fixdrawsizerelativelayoutlibrary.FixDrawSizeRelativeLayout;
 import jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout;
 import jack.me.sonweather.R;
+import jack.me.sonweather.model.ActualWeather;
 import jack.me.sonweather.ui.BackgroundDrawable;
 import jack.me.sonweather.ui.fregment.WeatherFragment;
 import jack.me.sonweather.ui.view.AwesomeFontView;
+import jack.me.sonweather.ui.view.CityListView;
 import jack.me.sonweather.utils.LogUtils;
+import jack.me.sonweather.utils.TimeUtils;
+import jack.me.sonweather.utils.WeatherUtils;
 import jack.me.viewpagerindicatorlibrary.ViewPagerIndicator;
 
 public class WeatherActivity extends AppCompatActivity {
@@ -50,8 +55,6 @@ public class WeatherActivity extends AppCompatActivity {
     RelativeLayout navigationBarContainer;
     @BindView(R.id.view_pager_weather)
     ViewPager viewPagerWeather;
-    @BindView(R.id.native_transition_layout)
-    NativeTransitionLayout nativeTransitionLayout;
     @BindView(R.id.weather_view_pager_container)
     FixDrawSizeRelativeLayout weatherViewPagerContainer;
 
@@ -61,6 +64,8 @@ public class WeatherActivity extends AppCompatActivity {
     RelativeLayout rlRoot;
     @BindView(R.id.img_background)
     ImageView imgBackground;
+    @BindView(R.id.city_list_view)
+    CityListView cityListView;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WeatherActivity.class);
@@ -91,6 +96,7 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
     private void inject() {
+
     }
 
     private void afterInject() {
@@ -117,36 +123,48 @@ public class WeatherActivity extends AppCompatActivity {
         });
         initViewPager();
         initBackGround();
+        initCityListView();
 
-        // TODO: 2016/11/14 remove
-        for (int i = 0; i < nativeTransitionLayout.getChildCount(); i++) {
-            View view = nativeTransitionLayout.getChildAt(i);
-            view.setOnClickListener(v -> nativeTransitionLayout.startStretchTransition(v));
-            view.setBackgroundColor(color[i]);
-        }
-        nativeTransitionLayout
-                .setOnSelectedAnchorListener((anchor, position) -> {
-                    viewPagerWeather.setCurrentItem(position, false);
-                    LogUtils.dFormat(TAG, "afterViews : on Selected position :%d, anchor height:%d,container height:%d", position, anchor.getHeight(), weatherViewPagerContainer.getHeight());
-                })
-                .setOnAnimationListener(anchor -> {
-                    LogUtils.dFormat(TAG, "afterViews : container height:%d ", weatherViewPagerContainer.getHeight());
-                    weatherViewPagerContainer.setFixTop(anchor.getTop());
-                    weatherViewPagerContainer.setFixBottom(anchor.getBottom());
-                })
-                .setOnAnimationEndListener((anchor, isShrink) -> {
-                    LogUtils.dFormat(TAG, "afterViews : on animator end isShrink :%s", isShrink);
-                    if (isShrink) {
-                        weatherViewPagerContainer.setFixTop(anchor.getTop());
-                        weatherViewPagerContainer.setFixBottom(anchor.getBottom());
-                    } else {
-                        ViewGroup.LayoutParams layoutParams = weatherViewPagerContainer.getLayoutParams();
-                        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                        weatherViewPagerContainer.requestLayout();
+        weatherViewPagerContainer.setBackgroundColor(color[0]);
+    }
+
+    private void initCityListView() {
+        cityListView
+                .init(R.layout.vh_city, viewPagerWeather, weatherViewPagerContainer)
+                .setOnBindDataListener((view, actualWeather, position) -> {
+                    TextView name = (TextView) view.findViewById(R.id.txt_city_name);
+                    name.setText(actualWeather.getCityName());
+                    TextView temp = (TextView) view.findViewById(R.id.txt_temperature);
+                    temp.setText(WeatherUtils.getTemperatureString(Integer.parseInt(actualWeather.getDayTemperature())));
+                    TextView time = (TextView) view.findViewById(R.id.txt_time);
+                    time.setText(TimeUtils.getTwelveHour(actualWeather.getLastUpdate()));
+                    view.setBackgroundColor(WeatherUtils.getWeatherBackgroundColor(actualWeather.getDayWeather()));
+                    if (position == 0) {
+                        view.getLayoutParams().height = getResources().getDimensionPixelSize(R.dimen.font_size_100);
                     }
                 });
-        weatherViewPagerContainer.setBackgroundColor(color[0]);
+
+        List<ActualWeather> list = new ArrayList<>();
+        list.add(ActualWeather.mBuilder().cityName("北京市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("南京市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("上海市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("保定市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("深圳市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("天津市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("长沙市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("昆明市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("株洲市").lastUpdate("2016-03-09 17:10:00").build());
+        list.add(ActualWeather.mBuilder().cityName("武汉市").lastUpdate("2016-03-09 17:10:00").build());
+
+        String[] weather = new String[]{"多云","晴","霾","多云","阴","雪","雨","大雨","雷阵雨","雨"};
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setDayTemperature(String.valueOf(i+10));
+            list.get(i).setDayWeather(weather[i]);
+        }
+
+        cityListView.addAllData(list);
+        cityListView.notifyRefreshAllList();
+
     }
 
     private void initBackGround() {
@@ -178,7 +196,7 @@ public class WeatherActivity extends AppCompatActivity {
     @OnClick(R.id.icon_city_list)
     public void onCityListIconClick() {
         int currentItem = viewPagerWeather.getCurrentItem();
-        nativeTransitionLayout.startShrinkTransition(currentItem);
+        cityListView.startShrinkTransition(currentItem);
     }
 
 

@@ -17,18 +17,22 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:textSize="@dimen/font_size_60"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dimen_8"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/font_size_54"
         android:text="16˚"
         android:textColor="@color/white"
+        android:fontFamily="sans-serif-thin"
         />
 
     <TextView
         android:id="@+id/txt_city_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignBaseline="@+id/txt_temperature"
-        android:textSize="@dimen/font_size_30"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/font_size_26"
         android:text="保定市"
         android:textColor="@color/white"
         />
@@ -38,7 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/txt_city_name"
-        android:textSize="@dimen/font_size_18"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/font_size_14"
         android:text="下午11:12"
         android:textColor="@color/white"
         />

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.Tolerate;
 
 /**
  * Created by zjchai on 2016/11/7.
@@ -25,4 +26,7 @@ public class ActualWeather extends Weather{
     @SerializedName("lastUpdate")
     String lastUpdate;
 
+    @Tolerate
+    public ActualWeather() {
+    }
 }

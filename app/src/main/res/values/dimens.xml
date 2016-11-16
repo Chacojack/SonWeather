@@ -51,6 +51,8 @@
     <dimen name="dimen_2">2dp</dimen>
     <dimen name="dimen_12">12dp</dimen>
     <dimen name="font_size_60">60dp</dimen>
+    <dimen name="font_size_26">26dp</dimen>
+    <dimen name="font_size_54">54dp</dimen>
 
 
 </resources>

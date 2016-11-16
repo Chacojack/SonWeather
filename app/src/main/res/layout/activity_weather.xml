@@ -63,47 +63,11 @@
 
     </jack.me.fixdrawsizerelativelayoutlibrary.FixDrawSizeRelativeLayout>
 
-    
-    <jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout
-        android:id="@+id/native_transition_layout"
+    <jack.me.sonweather.ui.view.CityListView
+        android:id="@+id/city_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="invisible"
-        >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/white"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/red"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/green"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/moon_yellow"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/colorAccent"
-            />
-
-    </jack.me.nativetransitionlayoutlibrary.NativeTransitionLayout>
-
+        />
 
 </RelativeLayout>
 
