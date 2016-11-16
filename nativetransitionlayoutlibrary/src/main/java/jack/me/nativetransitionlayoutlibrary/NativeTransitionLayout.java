@@ -20,13 +20,14 @@ public class NativeTransitionLayout extends LinearLayout {
 
     public static final String TAG = NativeTransitionLayout.class.getSimpleName();
 
-    public static final int ANIMATOR_DURATION = 500;
+    public static final int ANIMATOR_DURATION = 1500;
 
     private int screenWidth, screenHeight;
     private OnSelectedAnchorListener onSelectedAnchorListener;
     private OnAnimationListener onAnimationListener;
     private OnAnimationEndListener onAnimationEndListener;
-
+    private OnAnimationStartListener onAnimationStartListener;
+    private SupportOffset supportOffset;
 
 
     public NativeTransitionLayout(Context context) {
@@ -98,6 +99,9 @@ public class NativeTransitionLayout extends LinearLayout {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
+                if (onAnimationStartListener != null) {
+                    onAnimationStartListener.onAnimationStart(true);
+                }
                 setAllViewToStretchState(index, top, bottom, anchor);
                 setVisibility(VISIBLE);
             }
@@ -158,7 +162,15 @@ public class NativeTransitionLayout extends LinearLayout {
                 super.onAnimationCancel(animation);
                 reset(anchor, top, bottom, INVISIBLE);
                 if (onAnimationEndListener != null) {
-                    onAnimationEndListener.onAnimationEndListener(anchor,false);
+                    onAnimationEndListener.onAnimationEndListener(anchor, false);
+                }
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                if (onAnimationStartListener != null) {
+                    onAnimationStartListener.onAnimationStart(false);
                 }
             }
         });
@@ -166,15 +178,19 @@ public class NativeTransitionLayout extends LinearLayout {
     }
 
     private void doAnimator(float fraction, @IntRange(from = 0) int index, int top, int bottom, View anchor) {
+        int offset = 0;
+        if (supportOffset != null) {
+            offset = supportOffset.getOffset();
+        }
         for (int i = 0; i < getChildCount(); i++) {
             View view = getChildAt(i);
             if (i < index) { // 在上方的View，要从上方移出
-                view.setTranslationY(-top * fraction);
+                view.setTranslationY((offset - top) * fraction);
             } else if (i > index) { // 在下方的View，要从下方移出
-                view.setTranslationY((screenHeight - bottom) * fraction);
+                view.setTranslationY((screenHeight + offset - bottom) * fraction);
             }
-            anchor.setTop((int) (top * (1 - fraction)));
-            anchor.setBottom((int) (bottom + (screenHeight - bottom) * fraction));
+            anchor.setTop(offset + (int) ((top - offset) * (1 - fraction)));
+            anchor.setBottom((int) (bottom + (screenHeight + offset - bottom) * fraction));
             anchor.setAlpha(1 - fraction);
             if (onAnimationListener != null) {
                 onAnimationListener.onAnimationListener(anchor);
@@ -209,6 +225,16 @@ public class NativeTransitionLayout extends LinearLayout {
 
     public NativeTransitionLayout setOnAnimationEndListener(OnAnimationEndListener onAnimationEndListener) {
         this.onAnimationEndListener = onAnimationEndListener;
+        return this;
+    }
+
+    public NativeTransitionLayout setOnAnimationStartListener(OnAnimationStartListener onAnimationStartListener) {
+        this.onAnimationStartListener = onAnimationStartListener;
+        return this;
+    }
+
+    public NativeTransitionLayout setSupportOffset(SupportOffset supportOffset) {
+        this.supportOffset = supportOffset;
         return this;
     }
 }
