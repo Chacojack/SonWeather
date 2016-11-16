@@ -67,7 +67,9 @@
                     android:includeFontPadding="false"
                     android:text="7"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_95" />
+                    android:textSize="@dimen/font_size_95"
+                    android:fontFamily="sans-serif-thin"
+                    />
 
             </RelativeLayout>
 
