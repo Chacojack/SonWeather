@@ -24,7 +24,7 @@ public class ShowWeatherView extends ImageView {
     }
 
     private void afterViews() {
-        setImageDrawable(new LowPolyDrawable());
+        setImageDrawable(new SunDrawable(getContext()));
     }
 
 }

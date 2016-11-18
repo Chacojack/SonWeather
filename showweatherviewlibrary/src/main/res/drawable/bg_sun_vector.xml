@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="640dp"
+    android:viewportWidth="360"
+    android:viewportHeight="640"
+    >
+
+    <group
+        android:name="@string/group_sun">
+
+        <path android:name="@string/path_sun"
+            android:fillColor="@color/solar_color_start"
+            android:pathData="M 25 60
+                A 20 20 0 1 0 75 60
+                A 20 20 0 1 0 25 60
+            "
+            />
+
+    </group>
+
+    <group android:name="@string/group_sun_shine_clockwise">
+        <path android:name="@string/path_sun_shine_clockwise"
+            android:strokeWidth="1"
+            android:pathData="
+
+            "
+            />
+
+    </group>
+
+
+</vector>

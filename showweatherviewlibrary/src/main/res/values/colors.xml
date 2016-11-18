@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="solar_color_start">#FF7700</color>
+    <color name="solar_color_end">#FF3300</color>
+</resources>

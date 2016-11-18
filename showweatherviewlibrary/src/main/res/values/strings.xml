@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ShowWeatherViewLibrary</string>
+    <string name="path_sun">path_sun</string>
+    <string name="group_sun">group_sun</string>
+    <string name="group_sun_shine_clockwise">group_sun_shine_clockwise</string>
+    <string name="path_sun_shine_clockwise">path_sun_shine_clockwise</string>
 </resources>
