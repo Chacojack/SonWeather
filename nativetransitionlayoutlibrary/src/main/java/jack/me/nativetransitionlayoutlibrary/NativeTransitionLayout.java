@@ -20,7 +20,7 @@ public class NativeTransitionLayout extends LinearLayout {
 
     public static final String TAG = NativeTransitionLayout.class.getSimpleName();
 
-    public static final int ANIMATOR_DURATION = 1500;
+    public static final int ANIMATOR_DURATION = 500;
 
     private int screenWidth, screenHeight;
     private OnSelectedAnchorListener onSelectedAnchorListener;

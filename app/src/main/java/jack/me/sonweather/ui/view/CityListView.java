@@ -67,15 +67,14 @@ public class CityListView extends ScrollView {
         this.target = target;
         nativeTransitionLayout.setOnSelectedAnchorListener((anchor, position) -> {
             viewPager.setCurrentItem(position, false);
-            LogUtils.dFormat(TAG, "afterViews : on Selected position :%d, anchor height:%d,container height:%d", position, anchor.getHeight(), target.getHeight());
+            LogUtils.dFormat(TAG, "init : on Selected position :%d, anchor height:%d,container height:%d", position, anchor.getHeight(), target.getHeight());
         });
         nativeTransitionLayout.setOnAnimationListener(anchor -> {
-            LogUtils.dFormat(TAG, "afterViews : container height:%d ", target.getHeight());
             target.setFixTop(anchor.getTop() - getScrollY());
             target.setFixBottom(anchor.getBottom() - getScrollY());
         });
         nativeTransitionLayout.setOnAnimationEndListener((anchor, isShrink) -> {
-            LogUtils.dFormat(TAG, "afterViews : on animator end isShrink :%s", isShrink);
+            LogUtils.dFormat(TAG, "init : on animator end isShrink :%s", isShrink);
             if (isShrink) {
                 target.setFixTop(anchor.getTop() - getScrollY());
                 target.setFixBottom(anchor.getBottom() - getScrollY());
@@ -88,6 +87,7 @@ public class CityListView extends ScrollView {
             }
         });
         nativeTransitionLayout.setOnAnimationStartListener(isShrink -> {
+            LogUtils.dFormat(TAG, "init : on animation start is shrink :%s", isShrink);
             if (isShrink) {
                 setVisibility(VISIBLE);
             }

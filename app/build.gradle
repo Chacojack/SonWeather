@@ -65,6 +65,7 @@ dependencies {
     compile project(':viewpagerindicatorlibrary')
     compile project(':nativetransitionlayoutlibrary')
     compile project(':fixdrawsizerelativelayoutlibrary')
+    compile project(':showweatherviewlibrary')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
